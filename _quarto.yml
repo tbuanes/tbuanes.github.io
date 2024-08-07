@@ -1,0 +1,33 @@
+project:
+  type: website
+
+format:
+    html:
+      theme: cerulean
+      css: pcs956styles.css
+      number-sections: true
+
+
+website:
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
+      - text: "Introduction"
+        href: introduction.ipynb
+      - section: "Metrics"
+        contents:
+          - lossMetricUtility.ipynb
+          - metrics.ipynb
+          - literatureMetric.ipynb
+      - section: "Calibration"
+        href: calibration.ipynb
+        contents:
+          - groupingLoss.ipynb
+          - literatureCalibration.ipynb
+      - section: "Uncertainty of the prediction"
+        href: uncertainty.ipynb
+        contents: 
+          - uqmethods.ipynb
+          - literatureUncertainty.ipynb
+      
