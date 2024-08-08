@@ -1,0 +1,237 @@
+[
+  {
+    "objectID": "uqmethods.html#deep-ensembles-de",
+    "href": "uqmethods.html#deep-ensembles-de",
+    "title": "Methods for uncertainty quantification",
+    "section": "2 Deep Ensembles (DE)",
+    "text": "2 Deep Ensembles (DE)",
+    "crumbs": [
+      "Uncertainty of the prediction",
+      "Methods for uncertainty quantification"
+    ]
+  },
+  {
+    "objectID": "uqmethods.html#monte-carlo-dropout",
+    "href": "uqmethods.html#monte-carlo-dropout",
+    "title": "Methods for uncertainty quantification",
+    "section": "3 Monte Carlo dropout",
+    "text": "3 Monte Carlo dropout\n\n3.1 Concrete Dropout (CD)",
+    "crumbs": [
+      "Uncertainty of the prediction",
+      "Methods for uncertainty quantification"
+    ]
+  },
+  {
+    "objectID": "metrics.html",
+    "href": "metrics.html",
+    "title": "Evaluation metrics",
+    "section": "",
+    "text": "Before discussing the how to chose an appropriate metric for the problem at hand, let’s start by defining the most commonly used metrics for classification and regression problems, respectively.",
+    "crumbs": [
+      "Metrics",
+      "Evaluation metrics"
+    ]
+  },
+  {
+    "objectID": "metrics.html#metrics-for-binary-classification",
+    "href": "metrics.html#metrics-for-binary-classification",
+    "title": "Evaluation metrics",
+    "section": "1 Metrics for binary classification",
+    "text": "1 Metrics for binary classification\n\nAccuracy is a measure of the fraction of correctly units \\[\\text{Accuracy} = \\frac{TP + TN}{P + N} = \\frac{TP + TN}{TP + FP  + TN + FN}\\]\nPrecision is a measure of how large a fraction classified as positive was correctly classified \\[\\text{Precision} = \\frac{TP}{TP+FP}\\]\nTrue positive rate (TPR), recall or sensitivity is a measure of how large a fraction of the positive class was correctly classified \\[\\text{TPR} = \\frac{TP}{P} = \\frac{TP}{TP + FN}\\]\nTrue negative rate (TNR), Specificity is a measure of how large a fraction of the negative class was correctly classified \\[\\text{TNR} = \\frac{TN}{N} = \\frac{TN}{TN + FP}\\]\nF1 score is the most commonly used member of a more general class of measures (F\\(\\beta\\) score) and is defined as a mean of precision and recall \\[\\text{F}_1 = 2\\frac{\\text{precision}\\cdot\\text{recall}}{\\text{precision+recall}} = \\frac{2TP}{2TP + FP + FN}\\] By choosing \\(\\beta \\neq 1\\) one can give more weigth to either precision or recall \\[\\text{F}_\\beta = (1+\\beta^2)\\frac{\\text{precision}\\cdot\\text{recall}}{(\\beta^2\\cdot\\text{precision)+recall}} = \\frac{(1+\\beta^2)TP}{(1+\\beta^2)TP + FP + \\beta^2FN}\\]\n\n\n1.1 Choosing a metric\nAll the above metrics are valid measures-of-goodness, but not all make sense in all cases. For a trivial example, consider precision. If this metric is used in the maintenance example from the utility section, the result would be very bad indeed. Since the metric prioritises a high purity among the instances classified as positive, but does not pay any regard to the instances classified as negative, a large false negative rate is likely. But this was exactly what needed to be avoided in this case, since a false negative would lead to a breakdown of the machinery and thus incur a large cost.\nA slightly less obvious, but quite common and important, example of a bad choise of metric occurs when we have a large imbalance between the classes in the sample we want to classify. Say, positive class only constitute 1 permille of the total sample. If we use accuracy as our metric we would probably end up with a model that classifies all instances as negative, since this model would be 99.9% accurate. However, despite of the very high accuracy, the model is completely useless since none of the interesting instances are found.\n\n\n\n\n\n\nExercise\n\n\n\nYour task is to make a machine learning algorithm that will classify a large set of chemical compounds as being either good candidates for becoming a new medicine (positive) or uninteresting for medical use (negative). The selected compounds will be taken into further tests to prove or disprove their applicability as a medicine. Find suitable metrics in the given scenarios:\n\nFurther testing is cheap, and the potential revenue of the new medicine is large.\nFurther testing is expensive, and the potiential revenue of the new medicine is modest.\nFurther testing is expensive, and the potenial revenue of the new mecdicine is large.\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\nIn a search for dark matter a large dataset is collected. The vast majority (possibly all) of the instances in the dataset does not contain a the signature for dark matter. Imagine making a machinelearning algorithm tasked with finding instances which are candidates to being evidence of dark matter. Let an instance with a dark matter signature be the positive class. A successful algorithm should select a sample of instances with a large positive-to-negative ratio, but the sample should not be too small since this would mean that statistical fluctuations in the sampling degrades the result.\n\nWhy is accuracy, precision and recall bad choises of metric in this scenario?\nPropose a good metric. Can one of the “standard metrics” be used, or would it be better to device a new one?",
+    "crumbs": [
+      "Metrics",
+      "Evaluation metrics"
+    ]
+  },
+  {
+    "objectID": "metrics.html#metrics-for-regression",
+    "href": "metrics.html#metrics-for-regression",
+    "title": "Evaluation metrics",
+    "section": "2 Metrics for regression",
+    "text": "2 Metrics for regression\nMetrics for regression are typical an aggregate of the deviation between model prediction and correct value for all instances in the data set used for evaluation. Since both predicting a too high and a too low value is undesirable, one need to apply a function such that both cases contribute with a positive number in the aggregated value. In order to make the metric independent of number of instances used in the evaluation, one typically use the mean deviation.\nLet \\(\\hat{y}_i\\) be the predicted value corresponding to correct value \\(y_i\\).\n\nMean squared error (MSE) is a mean of the squared deviations from the correct value \\[\\text{MSE} = \\frac{1}{N}\\sum_{i=1}^N (\\hat{y}_i-y_i)^2\\]\nRoot mean squared error (RMSE) is the square root of MSE \\[\\text{RMSE} = \\sqrt{\\text{MSE}} = \\sqrt{\\frac{1}{N}\\sum_{i=1}^N (\\hat{y}_i-y_i)^2}\\]\nMean absolute error (MAE) is the mean of the absolute values of the deviations from the correct value \\[\\text{MAE} = \\frac{1}{N}\\sum_{i=1}^N |\\hat{y}_i - y_i|\\]\n\n\n2.1 Choosing a metric\nMSE and RMSE measure essentially the same thing, but there are nontheless important differences. MSE has the benefit that it is more easily differentiable, and is therefore a very good candidate for having the double use of both loss function and metric. RMSE, on the other hand, has - due to the square root after summing the squares - the same dimension as the input data. It is thus more easy to interpret what a particular value of RMSE means.\n\n\n\n\n\n\nExample\n\n\n\nAssume that we have a regression model that predicts the height of a person based on age, weight, gender, place of birth etc. Evaluating the model on a small sample of persons yields the following results\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(i\\)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n\n\n\n\n\\(y_i\\) (m)\n1.68\n1.72\n1.89\n1.78\n1.94\n1.76\n1.43\n1.82\n1.67\n1.72\n\n\n\\(\\hat{y}_i\\) (m)\n1.65\n1.73\n1.94\n1.81\n1.90\n1.76\n1.55\n1.81\n1.63\n1.70\n\n\n\nFrom this we can calculate \\[ \\text{MSE} = 2.25\\cdot 10^{-3}~\\mathrm{m}^2 \\] \\[ \\text{RMSE} = 0.047~\\mathrm{m}\\] Both metrics give a valide measure of how well the model fits the data, but only RMSE give us immediate information about how large a deviation we should expect from the model.\n\n\nMAE is an obvious metric to define since what we care about is the absolute value of the error, but since the absolute value function is not differentiable in \\(x=0\\) there are some numerical challenges in using it - which is part of the explanation why MSE or RMSE is more commonly preferred. A fact which may be a benefit compared to (R)MSE is that MAE is less sensitive to outliers. MAE has, as RMSE, the same dimension as the input data and is thus equally easy to interpret.\n\n\n\n\n\n\nExample\n\n\n\nUsing the same dataset as in the previous example, we calculate \\[ \\text{MAE} = 0.035~\\mathrm{m}\\] which, just as RMSE, can be interpreted as the “typical magnitude” of the deviations.\nIf we choose to throw away the largest deviation (\\(i=7)\\) as an outlier, we get the updated values \\[\\text{RMSE}' = 0.030~\\mathrm{m}\\] \\[\\text{MAE}' = 0.026~\\mathrm{m}\\] As expected, we se that RMSE change more than MAE when not including the outlier.",
+    "crumbs": [
+      "Metrics",
+      "Evaluation metrics"
+    ]
+  },
+  {
+    "objectID": "literatureUncertainty.html",
+    "href": "literatureUncertainty.html",
+    "title": "Suggested reading",
+    "section": "",
+    "text": "Deeply uncertain: comparing methods of uncertainty quantification in deep learning algorithms\nJ Caldeira and B Nord\nMach. Learn.: Sci. Technol. 2 015002",
+    "crumbs": [
+      "Uncertainty of the prediction",
+      "Suggested reading"
+    ]
+  },
+  {
+    "objectID": "literatureCalibration.html",
+    "href": "literatureCalibration.html",
+    "title": "Suggested reading",
+    "section": "",
+    "text": "On Calibration of Modern Neural Networks\nC Guo, G Pleiss, Y Sun, and K Weinberger\nProceedings of the 34th International Conference on Machine Learning, PMLR 70:1321-1330, 2017\nBeyond calibration: estimating the grouping loss of modern neural networks\nA Perez-Lebel, M Le Morvan, and G Varoquaux\nICLR 2023",
+    "crumbs": [
+      "Calibration",
+      "Suggested reading"
+    ]
+  },
+  {
+    "objectID": "cifar10/cifar.html",
+    "href": "cifar10/cifar.html",
+    "title": "Load datasets",
+    "section": "",
+    "text": "import torch\nimport torch.nn as nn\nimport torch.nn.functional as F\nimport torch.optim as optim\nfrom torchvision import datasets, transforms\nfrom torch.optim.lr_scheduler import StepLR\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nimport easydict\nimport deeplake\ndstrain = deeplake.load(\"hub://activeloop/cifar10-train\")\ndstest = deeplake.load(\"hub://activeloop/cifar10-test\")\n\n-\n\n\nOpening dataset in read-only mode as you don't have write permissions.\n\n\n-\n\n\nThis dataset can be visualized in Jupyter Notebook by ds.visualize() or at https://app.activeloop.ai/activeloop/cifar10-train\n\n\n\n\\\n\n\nhub://activeloop/cifar10-train loaded successfully.\n\n\n\n \n\n\nOpening dataset in read-only mode as you don't have write permissions.\n\n\n\\\n\n\nThis dataset can be visualized in Jupyter Notebook by ds.visualize() or at https://app.activeloop.ai/activeloop/cifar10-test\n\n\n\n/\n\n\nhub://activeloop/cifar10-test loaded successfully."
+  },
+  {
+    "objectID": "cifar10/cifar.html#correct-classified-vs-actual-number-as-a-function-of-ml-confidence-for-max-log-prob",
+    "href": "cifar10/cifar.html#correct-classified-vs-actual-number-as-a-function-of-ml-confidence-for-max-log-prob",
+    "title": "Load datasets",
+    "section": "3.1 Correct classified vs actual number as a function of ML confidence for max log-prob",
+    "text": "3.1 Correct classified vs actual number as a function of ML confidence for max log-prob\n\n## Transform to range [0,1]\noutput_softmax = torch.softmax(output, dim=1)  \n## Select largest entry\nselected_entries = torch.gather(output_softmax, 1, pred)\n\n\nstep = 0.05\ncat = 1\n\nbinMean = []\ncorrectFreq = []\nerror = []\ncorrect = []\nfor value in np.arange(0, 1.0, step):\n    start = value\n    end = start+step\n\n    # Select entries with convidence in interval (start,end]\n    conf_in_range = selected_entries[(selected_entries&gt;start) & (selected_entries&lt;=end)]\n    pred_in_range = pred[(selected_entries&gt;start) & (selected_entries&lt;=end)]\n    targ_in_range = target[[(selected_entries&gt;start)[:,0] & (selected_entries&lt;=end)[:,0]]].squeeze()\n    \n    binMean.append( start + step/2 )\n    correct.append( (pred_in_range == targ_in_range).sum().item() )\n    correctFreq.append( (pred_in_range == targ_in_range).sum().item()/targ_in_range.shape[0] if targ_in_range.shape[0]!=0 else 0 )\n    error.append( np.sqrt((pred_in_range == targ_in_range).sum().item())/targ_in_range.shape[0] if targ_in_range.shape[0]!=0 else 0 )\n\nplt.plot([0,1], [0,1], '--', color='grey')\nplt.errorbar(binMean, correctFreq, error, marker='.', linestyle='', color='blue')\nplt.xlabel(\"NN output\")\nplt.ylabel(\"Fraction correct classified\")\nplt.show()"
+  },
+  {
+    "objectID": "cifar10/cifar.html#classwise-check",
+    "href": "cifar10/cifar.html#classwise-check",
+    "title": "Load datasets",
+    "section": "3.2 Classwise check",
+    "text": "3.2 Classwise check\n\nstep = 0.05\n\nbinMean = []\ncorrectFreq = []\nerror = []\ncorrect = []\n\nplt.plot([0,1], [0,1], '--', color='grey')\nfor cat in np.arange(0,10):\n    for value in np.arange(0, 1.0, step):\n        start = value\n        end = start+step\n\n        # Select entries with convidence in interval (start,end]\n        conf_in_range = selected_entries[(selected_entries&gt;start) & (selected_entries&lt;=end)]\n        pred_in_range = pred[(selected_entries&gt;start) & (selected_entries&lt;=end)]\n        targ_in_range = target[[(selected_entries&gt;start)[:,0] & (selected_entries&lt;=end)[:,0]]].squeeze()\n\n        # Confine to only entries with target = cat\n        conf_in_range = conf_in_range[targ_in_range==cat]\n        pred_in_range = pred_in_range[targ_in_range==cat]\n        targ_in_range = targ_in_range[targ_in_range==cat]\n\n        binMean.append( start + step/2 )\n        correct.append( (pred_in_range == targ_in_range).sum().item() )\n        correctFreq.append( (pred_in_range == targ_in_range).sum().item()/targ_in_range.shape[0] if targ_in_range.shape[0]!=0 else 0 )\n        error.append( np.sqrt((pred_in_range == targ_in_range).sum().item())/targ_in_range.shape[0] if targ_in_range.shape[0]!=0 else 0 )\n    plt.plot(binMean, correctFreq, marker='.', linestyle='', linewidth=0.1, color='blue')\n\nplt.xlabel(\"NN output\")\nplt.ylabel(\"Fraction correct classified\")\nplt.show()\n\n\n\n\n\n\n\n\n\nstep = 0.05\n\nbinMean = []\ncorrectFreq = []\nerror = []\ncorrect = []\n\nplt.plot([0,1], [0,1], '--', color='grey')\ncat = 3\n\nfor value in np.arange(0, 1.0, step):\n    start = value\n    end = start+step\n\n    # Select entries with convidence in interval (start,end]\n    conf_in_range = selected_entries[(selected_entries&gt;start) & (selected_entries&lt;=end)]\n    pred_in_range = pred[(selected_entries&gt;start) & (selected_entries&lt;=end)]\n    targ_in_range = target[[(selected_entries&gt;start)[:,0] & (selected_entries&lt;=end)[:,0]]].squeeze()\n\n    # Confine to only entries with target = cat\n    conf_in_range = conf_in_range[targ_in_range==cat]\n    pred_in_range = pred_in_range[targ_in_range==cat]\n    targ_in_range = targ_in_range[targ_in_range==cat]\n\n    binMean.append( start + step/2 )\n    correct.append( (pred_in_range == targ_in_range).sum().item() )\n    correctFreq.append( (pred_in_range == targ_in_range).sum().item()/targ_in_range.shape[0] if targ_in_range.shape[0]!=0 else 0 )\n    error.append( np.sqrt((pred_in_range == targ_in_range).sum().item())/targ_in_range.shape[0] if targ_in_range.shape[0]!=0 else 0 )\n\nplt.errorbar(binMean, correctFreq, error, marker='.', linestyle='', color='blue')\nplt.legend('Only category ' + str(cat) )\nplt.xlabel(\"NN output\")\nplt.ylabel(\"Fraction correct classified\")\nplt.show()\n\n\n---------------------------------------------------------------------------\nTypeError                                 Traceback (most recent call last)\nCell In[90], line 31\n     28     error.append( np.sqrt((pred_in_range == targ_in_range).sum().item())/targ_in_range.shape[0] if targ_in_range.shape[0]!=0 else 0 )\n     30 plt.errorbar(binMean, correctFreq, error, marker='.', linestyle='', color='blue')\n---&gt; 31 plt.legend('Only category ' + cat)\n     32 plt.xlabel(\"NN output\")\n     33 plt.ylabel(\"Fraction correct classified\")\n\nTypeError: can only concatenate str (not \"int\") to str"
+  },
+  {
+    "objectID": "calibrationMNSIT/mnist.html",
+    "href": "calibrationMNSIT/mnist.html",
+    "title": "Define NN",
+    "section": "",
+    "text": "import torch\nimport torch.nn as nn\nimport torch.nn.functional as F\nimport torch.optim as optim\nfrom torchvision import datasets, transforms\nfrom torch.optim.lr_scheduler import StepLR\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nimport easydict\nclass Net(nn.Module):\n    def __init__(self):\n        super(Net, self).__init__()\n        self.conv1 = nn.Conv2d(1, 32, 3, 1)\n        self.conv2 = nn.Conv2d(32, 64, 3, 1)\n        self.dropout1 = nn.Dropout(0.25)\n        self.dropout2 = nn.Dropout(0.5)\n        self.fc1 = nn.Linear(9216, 128)\n        self.fc2 = nn.Linear(128, 10)\n\n    def forward(self, x):\n        x = self.conv1(x)\n        x = F.relu(x)\n        x = self.conv2(x)\n        x = F.relu(x)\n        x = F.max_pool2d(x, 2)\n        x = self.dropout1(x)\n        x = torch.flatten(x, 1)\n        x = self.fc1(x)\n        x = F.relu(x)\n        x = self.dropout2(x)\n        x = self.fc2(x)\n        output = F.log_softmax(x, dim=1)\n        return output"
+  },
+  {
+    "objectID": "calibrationMNSIT/mnist.html#correct-classified-vs-actual-number-as-a-function-of-ml-confidence-for-max-log-prob",
+    "href": "calibrationMNSIT/mnist.html#correct-classified-vs-actual-number-as-a-function-of-ml-confidence-for-max-log-prob",
+    "title": "Define NN",
+    "section": "2.1 Correct classified vs actual number as a function of ML confidence for max log-prob",
+    "text": "2.1 Correct classified vs actual number as a function of ML confidence for max log-prob\n\n## Transform to range [0,1]\noutput_softmax = torch.softmax(output, dim=1)  \n## Select largest entry\nselected_entries = torch.gather(output_softmax, 1, pred)\n\n\nstep = 0.1\n\nbinMean = []\ncorrectFreq = []\nerror = []\ncorrect = []\nfor value in np.arange(0, 1.0, step):\n    start = value\n    end = start+step\n\n    conf_in_range = selected_entries[(selected_entries&gt;start) & (selected_entries&lt;=end)]\n    pred_in_range = pred[(selected_entries&gt;start) & (selected_entries&lt;=end)]\n    targ_in_range = target[[(selected_entries&gt;start)[:,0] & (selected_entries&lt;=end)[:,0]]]\n    \n    binMean.append( start + step/2 )\n    correct.append( (pred_in_range == targ_in_range).sum().item() )\n    correctFreq.append( (pred_in_range == targ_in_range).sum().item()/targ_in_range.shape[0] if targ_in_range.shape[0]!=0 else 0 )\n    error.append( np.sqrt((pred_in_range == targ_in_range).sum().item())/targ_in_range.shape[0] if targ_in_range.shape[0]!=0 else 0 )\n\n\nplt.plot([0,1], [0,1], '--')\nplt.errorbar(binMean, correctFreq, error, marker='.', linestyle='')\nplt.show()\n\n\n\n\n\n\n\n\n\n## Correct classified vs actual number as a function of ML confidence for second largest log-prob\n\n\n## Select second largest entry\nselected_entries = torch.gather(output_softmax, 1, pred2)\n\nstep = 0.1\n\nbinMean = []\ncorrectFreq = []\nerror = []\ncorrect = []\nfor value in np.arange(0, 1.0, step):\n    start = value\n    end = start+step\n\n    conf_in_range = selected_entries[(selected_entries&gt;start) & (selected_entries&lt;=end)]\n    pred_in_range = pred2[(selected_entries&gt;start) & (selected_entries&lt;=end)]\n    targ_in_range = target[[(selected_entries&gt;start)[:,0] & (selected_entries&lt;=end)[:,0]]]\n    \n    binMean.append( start + step/2 )\n    correct.append( (pred_in_range == targ_in_range).sum().item() )\n    correctFreq.append( (pred_in_range == targ_in_range).sum().item()/targ_in_range.shape[0] if targ_in_range.shape[0]!=0 else 0 )\n    error.append( np.sqrt((pred_in_range == targ_in_range).sum().item())/targ_in_range.shape[0] if targ_in_range.shape[0]!=0 else 0 )\n\nplt.plot([0,1], [0,1], '--')\nplt.errorbar(binMean, correctFreq, error, marker='.', linestyle='')\nplt.show()"
+  },
+  {
+    "objectID": "calibration.html",
+    "href": "calibration.html",
+    "title": "Calibration",
+    "section": "",
+    "text": "A machine learning model for classification typically output a value (or one value per class for multiclass classification) which is used to determine the predicted class. In the case of binary classification, one typically apply a threshold such that if the number is above threshold the instance is predicted to belong to the positive class. For multiclassification, one typically choose the class associated with the largest output. Instead of only using a threshold or the class with the largest output number one can try to extract more informantion from the output value itself. Assume that the value is in the range [0,1].1 The closer to 1, the more confident we can be in the classification.\nAllthough the output cannot be interpreted as probability there is often (but not always) a one-to-one relation between the output value and the true probability. To obtain the probability from the ML output, one can apply a calibration step after training the ML model.\nIt has been observed2 that the developments in ML over the last years that has produced a much better accuracy at the same time tend to lead to more mis-calibrated results out of the box. Thus, the need for calibration seems to be larger the more complex the ML model is.",
+    "crumbs": [
+      "Calibration"
+    ]
+  },
+  {
+    "objectID": "calibration.html#footnotes",
+    "href": "calibration.html#footnotes",
+    "title": "Calibration",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nIt is common to use a sigmoid or softmax function in the last layer of a NN such that the output is in this range.↩︎\nOn Calibration of Modern Neural Networks Guo, G Pleiss, Y Sun, and K Weinberger of the 34th International Conference on Machine Learning, PMLR 70:1321-1330, 2017↩︎",
+    "crumbs": [
+      "Calibration"
+    ]
+  },
+  {
+    "objectID": "calibrationMNSIT/read-mnist-dataset.html",
+    "href": "calibrationMNSIT/read-mnist-dataset.html",
+    "title": "",
+    "section": "",
+    "text": "::: {#cell-0 .cell _cell_guid=‘79c7e3d0-c299-4dcb-8224-4455121ee9b0’ _uuid=‘d629ff2d2480ee46fbb7e2d37f6b5fab8052498a’ trusted=‘true’ execution_count=1}\n#\n# This is a sample Notebook to demonstrate how to read \"MNIST Dataset\"\n#\nimport numpy as np # linear algebra\nimport struct\nfrom array import array\nfrom os.path  import join\n\n#\n# MNIST Data Loader Class\n#\nclass MnistDataloader(object):\n    def __init__(self, training_images_filepath,training_labels_filepath,\n                 test_images_filepath, test_labels_filepath):\n        self.training_images_filepath = training_images_filepath\n        self.training_labels_filepath = training_labels_filepath\n        self.test_images_filepath = test_images_filepath\n        self.test_labels_filepath = test_labels_filepath\n    \n    def read_images_labels(self, images_filepath, labels_filepath):        \n        labels = []\n        with open(labels_filepath, 'rb') as file:\n            magic, size = struct.unpack(\"&gt;II\", file.read(8))\n            if magic != 2049:\n                raise ValueError('Magic number mismatch, expected 2049, got {}'.format(magic))\n            labels = array(\"B\", file.read())        \n        \n        with open(images_filepath, 'rb') as file:\n            magic, size, rows, cols = struct.unpack(\"&gt;IIII\", file.read(16))\n            if magic != 2051:\n                raise ValueError('Magic number mismatch, expected 2051, got {}'.format(magic))\n            image_data = array(\"B\", file.read())        \n        images = []\n        for i in range(size):\n            images.append([0] * rows * cols)\n        for i in range(size):\n            img = np.array(image_data[i * rows * cols:(i + 1) * rows * cols])\n            img = img.reshape(28, 28)\n            images[i][:] = img            \n        \n        return images, labels\n            \n    def load_data(self):\n        x_train, y_train = self.read_images_labels(self.training_images_filepath, self.training_labels_filepath)\n        x_test, y_test = self.read_images_labels(self.test_images_filepath, self.test_labels_filepath)\n        return (x_train, y_train),(x_test, y_test)        \n\n:::\n::: {#cell-1 .cell _uuid=‘d89732350afbbd4f4cf1aeaf877a9b2c0c9e9f43’ trusted=‘true’ execution_count=2}\n#\n# Verify Reading Dataset via MnistDataloader class\n#\n%matplotlib inline\nimport random\nimport matplotlib.pyplot as plt\n\n#\n# Set file paths based on added MNIST Datasets\n#\ninput_path = './mnist'\ntraining_images_filepath = join(input_path, 'train-images-idx3-ubyte/train-images-idx3-ubyte')\ntraining_labels_filepath = join(input_path, 'train-labels-idx1-ubyte/train-labels-idx1-ubyte')\ntest_images_filepath = join(input_path, 't10k-images-idx3-ubyte/t10k-images-idx3-ubyte')\ntest_labels_filepath = join(input_path, 't10k-labels-idx1-ubyte/t10k-labels-idx1-ubyte')\n\n#\n# Helper function to show a list of images with their relating titles\n#\ndef show_images(images, title_texts):\n    cols = 5\n    rows = int(len(images)/cols) + 1\n    plt.figure(figsize=(30,20))\n    index = 1    \n    for x in zip(images, title_texts):        \n        image = x[0]        \n        title_text = x[1]\n        plt.subplot(rows, cols, index)        \n        plt.imshow(image, cmap=plt.cm.gray)\n        if (title_text != ''):\n            plt.title(title_text, fontsize = 15);        \n        index += 1\n\n#\n# Load MINST dataset\n#\nmnist_dataloader = MnistDataloader(training_images_filepath, training_labels_filepath, test_images_filepath, test_labels_filepath)\n(x_train, y_train), (x_test, y_test) = mnist_dataloader.load_data()\n\n#\n# Show some random training and test images \n#\nimages_2_show = []\ntitles_2_show = []\nfor i in range(0, 10):\n    r = random.randint(1, 60000)\n    images_2_show.append(x_train[r])\n    titles_2_show.append('training image [' + str(r) + '] = ' + str(y_train[r]))    \n\nfor i in range(0, 5):\n    r = random.randint(1, 10000)\n    images_2_show.append(x_test[r])        \n    titles_2_show.append('test image [' + str(r) + '] = ' + str(y_test[r]))    \n\nshow_images(images_2_show, titles_2_show)\n\n\n---------------------------------------------------------------------------\nFileNotFoundError                         Traceback (most recent call last)\nCell In[2], line 38\n     34 #\n     35 # Load MINST dataset\n     36 #\n     37 mnist_dataloader = MnistDataloader(training_images_filepath, training_labels_filepath, test_images_filepath, test_labels_filepath)\n---&gt; 38 (x_train, y_train), (x_test, y_test) = mnist_dataloader.load_data()\n     40 #\n     41 # Show some random training and test images \n     42 #\n     43 images_2_show = []\n\nCell In[1], line 44, in MnistDataloader.load_data(self)\n     43 def load_data(self):\n---&gt; 44     x_train, y_train = self.read_images_labels(self.training_images_filepath, self.training_labels_filepath)\n     45     x_test, y_test = self.read_images_labels(self.test_images_filepath, self.test_labels_filepath)\n     46     return (x_train, y_train),(x_test, y_test)\n\nCell In[1], line 22, in MnistDataloader.read_images_labels(self, images_filepath, labels_filepath)\n     20 def read_images_labels(self, images_filepath, labels_filepath):        \n     21     labels = []\n---&gt; 22     with open(labels_filepath, 'rb') as file:\n     23         magic, size = struct.unpack(\"&gt;II\", file.read(8))\n     24         if magic != 2049:\n\nFile ~\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python311\\site-packages\\IPython\\core\\interactiveshell.py:324, in _modified_open(file, *args, **kwargs)\n    317 if file in {0, 1, 2}:\n    318     raise ValueError(\n    319         f\"IPython won't let you open fd={file} by default \"\n    320         \"as it is likely to crash IPython. If you know what you are doing, \"\n    321         \"you can use builtins' open.\"\n    322     )\n--&gt; 324 return io_open(file, *args, **kwargs)\n\nFileNotFoundError: [Errno 2] No such file or directory: '../input\\\\train-labels-idx1-ubyte/train-labels-idx1-ubyte'\n\n\n:::"
+  },
+  {
+    "objectID": "groupingLoss.html",
+    "href": "groupingLoss.html",
+    "title": "Grouping loss",
+    "section": "",
+    "text": "Even if the ML algorithm is well calibrated overall, it is not guaranteed that the confidence for individual instances is well matched with the true probability for its classification. Before attempting a more general discussion, lets consider an example.\n\n\n\n\n\n\nExample\n\n\n\nThe CIFAR-10 dataset consists of 60000 (training) + 10000 (test) 32x32 pixel colour images organised into 10 non-overlapping categories. Using a quite small NN, the images are categorised with 71% accuracy. To check how well calibrated the NN is, we plot the fraction of correctly classified images as a function of NN output (20 bins). With a perfectly calibrated NN, the fraction should correspond to NN output, i.e. all points should be on the dashed line. The size of error bars in the plots are calculated assuming a Poisson distribution (which we will se is not appropriate in this example)\n\nExcept for the three first bins, which are empty, the NN agreement with the dashed line is very good. We could therefore be tempted to conclude that this is a well-calibrated NN and move on. But things are not so simple. Even though the NN is well calibrated on average, this does not need to be the case for each individual prediction. Thus even though an 70% of all images with output 0.7 indeed are correctly classified, it may be - and is in this case - subsets of images with NN output 0.7 where the fraction of correctly classified images deviate a lot from 70%.\nIf we now make the same plot, but restricted to data belonging to only one category things look different. For instance classification of images which really belongs to category 5 (dogs) still look pretty good, but for category 3 (cats) the fraction of correctly classified images is much lower than the “probability” found by the NN.\n \nMaking the same plot for all 10 categories (hiding the errorbars to de-clutter the plot) shows that the spread is quite large. Thus, even though the NN output on average had a good match to the probability for the image to be classified correctly, on an category by category basis this is far from true. What hasn’t been checked here, but is conceivable, is that there are also variations within the categories. It could for instance be that only a subset of the cat images are classified with too low confidence, while another subset has correct or even too high confidence.",
+    "crumbs": [
+      "Calibration",
+      "Grouping loss"
+    ]
+  },
+  {
+    "objectID": "introduction.html",
+    "href": "introduction.html",
+    "title": "Introduction",
+    "section": "",
+    "text": "There are a large number of tools that let you easily set up and train a neural network or other machine learning model to analyse a data set. Such models may give good results, but to understand whether they really do a critical evaluation should be performed. We will see that an ML model may classify over 99% of all instances correct, and still be completely useless. In other cases 80% correct may be a great result. It all depends on the problem at hand - and it is critical to consider the nature of the problem when evaluating what is a good result. The first part of this module will discuss how to evaluate the performance of a trained ML model.\nTypically in a classification task, the final layer applies a sigmoid (or softmax if multiclass) function that transforms the output to a number between 0 and 1. This number is often interpreted as a probability for the instance to belong to a certain class, but this is generally not true. Allthough a well-trained model should output a number which is such that closer to 1 means more probable to be of that class, there is no reason to expect a linear relation between the ML output and the probability of belonging to the class. If the exact probability isn’t of importance to us, we may get away with using the ML output as it is - but remember to not confuse it with a probability. However, there are many cases where “more likely to be of this class” isn’t good enough. In such cases we can attempt to calibrate the output to actually approximate the true probability. This discussion is the topic of the second part of the module.\nAssume you have a well-trained, well-calibrated ML model. If the model outputs 90% probability for an instance to belong to class A, are you then sure that you can trust this number? In general there are a lot of sources of uncertainty/randomness, both relating to measurement of the input features used in training the model, in selection of training data, and in the process of setting up and training the ML model. If the classification is important, we should not only care about the probability assingned by the model, but also how certain this probability is. Whether an instance is evaluated to belong to class A with \\((90\\pm 1)\\%\\) probability or with \\((90^{+10}_{-30})\\%\\) probability may make a major difference. This discussion is the topic of the third part of this module.",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "literatureMetric.html",
+    "href": "literatureMetric.html",
+    "title": "Suggested reading",
+    "section": "",
+    "text": "Evaluation metrics and statistical tests for machine learning\nO Rainio, J Teuho, and R Kl'en\nScientific Reports volume 14, Article number: 6086 (2024)",
+    "crumbs": [
+      "Metrics",
+      "Suggested reading"
+    ]
+  },
+  {
+    "objectID": "lossMetricUtility.html",
+    "href": "lossMetricUtility.html",
+    "title": "Loss function, metric and utility",
+    "section": "",
+    "text": "Loss function, metric and utility are related, but still different concepts that are used when developing a machine learning model. The former two are best known, and are generally discussed in any introduction to machine learning. The latter is less often discussed, but should not be forgotten when creating a machine learning model which is to be used for decision making. The same mathematical function may be used for all three, but more typically one will use different functions for each of them.",
+    "crumbs": [
+      "Metrics",
+      "Loss function, metric and utility"
+    ]
+  },
+  {
+    "objectID": "lossMetricUtility.html#loss-function",
+    "href": "lossMetricUtility.html#loss-function",
+    "title": "Loss function, metric and utility",
+    "section": "1 Loss function",
+    "text": "1 Loss function\nThe role of the loss function is to measure the performance of the machine learning model during training, to guide the further training process. For example in the case of supervised learning, the loss function is a quantitative measure of the difference between the machine learning models prediction on (a batch of) the training data and the ground truth of the same dataset. Thus the training proceeds by trying to minimize the loss function. In order for a loss function to work well in the optimisation procedure it needs to be as close to continous as possible. To understand why, it is easiest to first consider a counter-example. Let’s say we use the precision, \\[\\text{Precision} = \\frac{TP}{TP+TN}\\] as loss function in a classification problem. Here TP and TN are the number of true positives (instances correctly classified to the class we denote as positive) and true negatives (instances correctly classified to the class we denote negative), respectively. For this proposed loss function to change its value, the parameters of the model must be changed enough to change the classification of at least one event, thus increasing or decreasing TP or TN. In many cases this may require a substantial change in parameters, causing the training process to stop prematurely. A more commonly used, and better loss function for classification is the cross entropy \\[H = -y\\log\\hat{y} - (1-y)\\log(1-\\hat{y})\\] where \\(y = 0 \\text{ or } 1\\) denominates the true class of the instance, whereas \\(0\\leq \\hat{y} \\leq 1\\) is the model’s prediction of the same instance. Comparing to the Precision case above, the value of \\(\\hat{y}\\) would have to cross a threshold (ofte taken to be \\(0.5\\)) for the loss function to change its value. However, in this case any change in the value of \\(\\hat{y}\\) would change the value of the loss function.",
+    "crumbs": [
+      "Metrics",
+      "Loss function, metric and utility"
+    ]
+  },
+  {
+    "objectID": "lossMetricUtility.html#metric",
+    "href": "lossMetricUtility.html#metric",
+    "title": "Loss function, metric and utility",
+    "section": "2 Metric",
+    "text": "2 Metric\nThe role of the metric is to measure the performance of the trained machine learning model, and to allow for comparison of the performance across different models applied to the same task. The metric should not just by any number which can measure the performance, but it should ideally be easy to interpret the meaning of its numerical value. Furthermore, the measure should be chosen to be meaningful for the type of data, and in the relevant context the machine learning model is applied to. This latter point will be the topic of the next section, and will thus not be discussed here. But it can be useful to briefly look at why a typical loss function such as cross entropy is normally not well suited as a metric. After all, the loss function is also a meaure of the model’s performance, so one might wonder why not let us also be our metric. First of all, the cross entropy as defined above, was presented per evaluated instance. Thus to evaluate the performance on a larger batch of instances, one would sum over all individual contributions. This means that the value of the cross entropy depends on the batch size, so one would at least have to normalise it to get a meaningful value for comparison. But the cross entropy also depends on the exact values of \\(\\hat{y}\\) from the model. Two models which perform equally well measured by other means can have very different \\(\\hat{y}\\)-distributions. Thus for a comparison across different model architectures, the cross entropy (and most other typical loss functions) is not well suited. Furthermore, different types of machine learning models (neural networks, support vector machines, regression trees, etc.) may have different optimal, or even possible, loss functions - again showing that the loss function is usually not a good choise as metric.",
+    "crumbs": [
+      "Metrics",
+      "Loss function, metric and utility"
+    ]
+  },
+  {
+    "objectID": "lossMetricUtility.html#sec-utility",
+    "href": "lossMetricUtility.html#sec-utility",
+    "title": "Loss function, metric and utility",
+    "section": "3 Utility",
+    "text": "3 Utility\nThe utility measures the “value” of the outcome of the decision made by the machine learning model; for instance how much money is won or lost by making that decision. Thus the decision process should be set up such that the expected utility is maximised. Maximising the utility is not necessarily equivalent to optimising one of the metrics which is typically used for evaluating model performance.\n\n\n\n\n\n\nExample\n\n\n\nAs an example of this, let’s imagine a test that determines whether maintenance of some machinery is required. There is a cost to performing maintenance, but failing to maintain the machinery when needed will cause a breakdown that is much more expensive. Define positive = test claims that maintenance is required and negative = test claims that maintenance is not required. Assume that the associated costs are (in some arbitrary units):\n\n\n\nTP\nFP\nTN\nFN\n\n\n\n\n-1\n-1\n0\n-1000\n\n\n\nFurthermore, let’s assume that at some particular time the probability that maintenance is in fact required is 5%.\nIf we assume our test to be 97% accurate, we can calculate the expected cost as: \\[\\begin{align*}\n        U &= \\text{ACC}\\cdot(f_\\text{pos}\\cdot U_\\text{TP} + f_\\text{neg}\\cdot U_\\text{TN}) + (1-\\text{ACC})\\cdot(f_\\text{neg}\\cdot U_\\text{FP} + f_\\text{pos}\\cdot U_\\text{FN}) \\\\\n        &= 0.97\\cdot [0.05\\cdot (-1) + 0.95\\cdot 0] + 0.03\\cdot[0.95\\cdot(-1) + 0.05\\cdot(-1000)] \\\\\n        &= -1.577\n    \\end{align*}\\]\nIf one, on the other hand, we don’t use the test at all and just classify everyting as positive - meaning we perform maintenance every time - the expected cost is: \\[\\begin{align*}\n        U &= f_\\text{pos}\\cdot U_\\text{TP} + f_\\text{neg}\\cdot U_\\text{FP} \\\\\n        &= 0.05\\cdot (-1) + 0.95\\cdot (-1) \\\\\n        &= -1\n    \\end{align*}\\] which is less expensive than the result using the test. So we see that the large cost of false negatives means that not even a 97% accurate model is sufficient to beat always choosing positive class. In fact, the test would need to have an accuracy of 98.1% to break even.",
+    "crumbs": [
+      "Metrics",
+      "Loss function, metric and utility"
+    ]
+  },
+  {
+    "objectID": "uncertainty.html",
+    "href": "uncertainty.html",
+    "title": "Uncertainty",
+    "section": "",
+    "text": "Whenever one wants to determine something about the world we live in, there is uncertainty involved. If you perform a measurement, there will only be a finite achievable precision. If you sample a population to evaluate something, no matter how well you design the study there is a possibility that your sample is not completely representative of the whole population (unless you can actually include the whole population in your sample). The uncertainty is not necessarily a problem, though. If you can control the uncertainty such that its magnitude is small enough to be irrelevant, all is well. And even if you can’t make the uncertainty as small as you would like, your results may be perfectly usable as long as you keep the uncertainty in mind. This is provided that you can actually quantify the uncertainty. There are well-established methods for quantifying, or at least estimating, the uncertainty of most physical measurements and also for combining the uncertainties of the input data when calculating a composite quantity. But when an ML model is involved, with its large number of internal parameters, it is less clear how to estimate the uncertainty of its output.",
+    "crumbs": [
+      "Uncertainty of the prediction"
+    ]
+  },
+  {
+    "objectID": "uncertainty.html#classification-of-uncertainty",
+    "href": "uncertainty.html#classification-of-uncertainty",
+    "title": "Uncertainty",
+    "section": "1 Classification of uncertainty",
+    "text": "1 Classification of uncertainty\nBefore dicussing how to quantify the uncertainty, let’s start by having a look of different types of uncertainty. Depending on the domain, there are different ways of classifying uncertainty, which are only partly overlapping. Here, I will discuss two types of classifications. In many natural sciences, e.g. physics, one usually talks about statistical/stochastic and systematic uncertainty. In computer science one more often refer to aleatoric and epistemic uncertainty. These two classification schemes are often described as indentical making statistical/aleatoric and systematic/epistemic synonyms. In reality there are however some subtle differences, since the nature of uncertainty in a physical measurement and in a mathematical model are different.\n\n1.1 Statistical/stochastic uncertainty\nIf we repeat a measurement, say the voltage across a light bulb, several times we will not get the same value every time (provided the resolution of the voltmeter is sufficently good) since the voltage can never be absolutely stable. In the same way, if we measure the time interval between radioactive decays from some source, there will be some variation since the decay process is fundamentally stochastic. The same is true for any physical measurement - if you try to make it sufficiently precise, you will necessarily observe some fluctuations in the value you measure. The statistical uncertainty is relatively easy to handle: by making repeated measurements and averaging the result one find a better estimate of the true value than what a single measurement will give. Also, if one has some knowledge of the underlying statistical model for the fluctuations (Gaussian, Poisson, …) there are concrete receipts on how to quantify the uncertainty of this estimate. Furthermore, if one calculates a quantity which is a function of two or more measured values, the uncertainty of the compund quantity can easily(ish) be calculated as well.\n\n\n1.2 Systematic uncertainty\nSystematic uncertainties relates to specific measurement apparatuses or procedures, and countrary to the statistical uncertainty will typically shift all measurement results in one direction. A trivial example may be a measurement rod which expands or contracts when the temperature changes. All measurements taken at the same temperatur will then be shifted by the same amount. There is no general procedure for how to estimate the systematic uncertainty - it depends to much on the nature of the measurement that is done. In many cases the best one can do is to perform the same measurement with a different apparatus/procedure and us the deviation as an estimate of the uncertainty. Also, there is no general prescription for how to combine the statistical uncertainty into a compound uncertainty when calculating a value based on several measured parameters. It is quite common to use the same procedure as for statistical uncertainties, but there is no statistical foundation for doing this.",
+    "crumbs": [
+      "Uncertainty of the prediction"
+    ]
+  }
+]
