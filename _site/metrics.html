@@ -109,7 +109,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lossMetricUtility.html">Metrics</a></li><li class="breadcrumb-item"><a href="./metrics.html">Evaluation metrics</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./metricIntro.html">Metrics</a></li><li class="breadcrumb-item"><a href="./metrics.html">Evaluation metrics</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -137,7 +137,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a href="./metricIntro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Metrics</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -219,7 +219,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lossMetricUtility.html">Metrics</a></li><li class="breadcrumb-item"><a href="./metrics.html">Evaluation metrics</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./metricIntro.html">Metrics</a></li><li class="breadcrumb-item"><a href="./metrics.html">Evaluation metrics</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Evaluation metrics</h1>
 </div>
@@ -241,6 +241,19 @@ window.Quarto = {
 <p>Before discussing the how to chose an appropriate metric for the problem at hand, let’s start by defining the most commonly used metrics for classification and regression problems, respectively.</p>
 <section id="metrics-for-binary-classification" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="metrics-for-binary-classification"><span class="header-section-number">1</span> Metrics for binary classification</h2>
+<p>An ML model typically give out a <em>score</em> for each instance which is the basis for the classification. Often this score is normalised to be in the range [0,1] where we take numbers closer to 0 to mean classified as belonging to the negative class, and numbers closer to 1 mean classified as belonging to the positive class. Often, but not necessarily, the threshold is placed at 0.5.</p>
+<p>The most commonly used metrics for classification are based on the <em>confusion matrix</em>. The confusion matrix for binary classification is a <span class="math inline">\(2\times 2\)</span> matrix categorising the classified events as</p>
+<ul>
+<li>True positive (TP) if the instance was classified as belonging to the <em>positive</em> class and this was <em>correct</em>.</li>
+<li>True negative (TN) if the instance was classified as belonging to the <em>negative</em> class and this was <em>correct</em>.</li>
+<li>False positive (FP) if the instance was classified as belonging to the <em>positive</em> class and this was <em>incorrect</em>.</li>
+<li>False negative (FN) if the instance was classified as belonging to the <em>negative</em> class and this was <em>incorrect</em>.</li>
+</ul>
+<p>There is no universally adopted convention for whether rows or columns should present the actual value, so it is important that the axes on the confusion matrix are labelled.</p>
+<p><img src="./images/confusionmatrix.png" class="img-fluid"></p>
+<p>The numbers in the confusion matrix may be presented in different ways: Commonly the absolute numbers for each category is presented, but it is often beneficial to also include relative numbers. The normalization of the relative numbers may differ, so pay attention! The numbers for all of the matrix may sum to 1, or each row or column may sum to 1.</p>
+<p><img src="./images/confusionmatrixNum.png" class="img-fluid"></p>
+<p>Based on the numbers from the confusion matrix, we can define several scalars which are measures of performance. Since we are reducing the <span class="math inline">\(2\times2\)</span> matrix into a scalar, some information is necessarily lost. With an appropriate choice of metric, this loss of information isn’t a problem, but choosing a metric which doesn’t fit the problem at hand will yield a misleading measure of performance.</p>
 <ul>
 <li><strong>Accuracy</strong> is a measure of the fraction of correctly units <span class="math display">\[\text{Accuracy} = \frac{TP + TN}{P + N} = \frac{TP + TN}{TP + FP  + TN + FN}\]</span></li>
 <li><strong>Precision</strong> is a measure of how large a fraction classified as positive was correctly classified <span class="math display">\[\text{Precision} = \frac{TP}{TP+FP}\]</span></li>

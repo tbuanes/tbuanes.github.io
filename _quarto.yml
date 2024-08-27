@@ -16,6 +16,7 @@ website:
       - text: "Introduction"
         href: introduction.ipynb
       - section: "Metrics"
+        href: metricIntro.ipynb
         contents:
           - lossMetricUtility.ipynb
           - metrics.ipynb

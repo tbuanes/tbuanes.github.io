@@ -142,7 +142,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a href="../metricIntro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Metrics</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -243,7 +243,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="cell-1" class="cell" data-execution_count="68">
+<div id="cell-1" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn.functional <span class="im">as</span> F</span>
@@ -954,7 +954,7 @@ Test set: Average loss: 0.8525, Accuracy: 7088/10000 (71%)
 </div>
 </div>
 </div>
-<div id="cell-16" class="cell" data-execution_count="90">
+<div id="cell-16" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>step <span class="op">=</span> <span class="fl">0.05</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>binMean <span class="op">=</span> []</span>
@@ -985,22 +985,22 @@ Test set: Average loss: 0.8525, Accuracy: 7088/10000 (71%)
 <span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>    error.append( np.sqrt((pred_in_range <span class="op">==</span> targ_in_range).<span class="bu">sum</span>().item())<span class="op">/</span>targ_in_range.shape[<span class="dv">0</span>] <span class="cf">if</span> targ_in_range.shape[<span class="dv">0</span>]<span class="op">!=</span><span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span> )</span>
 <span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>plt.errorbar(binMean, correctFreq, error, marker<span class="op">=</span><span class="st">'.'</span>, linestyle<span class="op">=</span><span class="st">''</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
-<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>plt.legend(<span class="st">'Only category '</span> <span class="op">+</span> <span class="bu">str</span>(cat) )</span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>plt.text(<span class="fl">0.05</span>, <span class="fl">0.9</span>, <span class="st">'Only category '</span> <span class="op">+</span> <span class="bu">str</span>(cat))</span>
 <span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"NN output"</span>)</span>
 <span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Fraction correct classified"</span>)</span>
 <span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
 <pre><span class="ansi-red-fg ansi-bold">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg ansi-bold">TypeError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg ansi-bold">In[90], line 31</span>
-<span class="ansi-green-fg">     28</span>     error<span style="color:rgb(98,98,98)">.</span>append( np<span style="color:rgb(98,98,98)">.</span>sqrt((pred_in_range <span style="color:rgb(98,98,98)">==</span> targ_in_range)<span style="color:rgb(98,98,98)">.</span>sum()<span style="color:rgb(98,98,98)">.</span>item())<span style="color:rgb(98,98,98)">/</span>targ_in_range<span style="color:rgb(98,98,98)">.</span>shape[<span style="color:rgb(98,98,98)">0</span>] <span style="font-weight:bold;color:rgb(0,135,0)">if</span> targ_in_range<span style="color:rgb(98,98,98)">.</span>shape[<span style="color:rgb(98,98,98)">0</span>]<span style="color:rgb(98,98,98)">!=</span><span style="color:rgb(98,98,98)">0</span> <span style="font-weight:bold;color:rgb(0,135,0)">else</span> <span style="color:rgb(98,98,98)">0</span> )
-<span class="ansi-green-fg">     30</span> plt<span style="color:rgb(98,98,98)">.</span>errorbar(binMean, correctFreq, error, marker<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">.</span><span style="color:rgb(175,0,0)">'</span>, linestyle<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">'</span>, color<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">blue</span><span style="color:rgb(175,0,0)">'</span>)
-<span class="ansi-green-fg ansi-bold">---&gt; 31</span> plt<span style="color:rgb(98,98,98)">.</span>legend(<span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">Only category </span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">+</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">cat</span>)
-<span class="ansi-green-fg">     32</span> plt<span style="color:rgb(98,98,98)">.</span>xlabel(<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">NN output</span><span style="color:rgb(175,0,0)">"</span>)
-<span class="ansi-green-fg">     33</span> plt<span style="color:rgb(98,98,98)">.</span>ylabel(<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Fraction correct classified</span><span style="color:rgb(175,0,0)">"</span>)
+<span class="ansi-red-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg ansi-bold">In[3], line 16</span>
+<span class="ansi-green-fg">     13</span> end <span style="color:rgb(98,98,98)">=</span> start<span style="color:rgb(98,98,98)">+</span>step
+<span class="ansi-green-fg">     15</span> <span style="font-style:italic;color:rgb(95,135,135)"># Select entries with convidence in interval (start,end]</span>
+<span class="ansi-green-fg ansi-bold">---&gt; 16</span> conf_in_range <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">selected_entries</span>[(selected_entries<span style="color:rgb(98,98,98)">&gt;</span>start) <span style="color:rgb(98,98,98)">&amp;</span> (selected_entries<span style="color:rgb(98,98,98)">&lt;</span><span style="color:rgb(98,98,98)">=</span>end)]
+<span class="ansi-green-fg">     17</span> pred_in_range <span style="color:rgb(98,98,98)">=</span> pred[(selected_entries<span style="color:rgb(98,98,98)">&gt;</span>start) <span style="color:rgb(98,98,98)">&amp;</span> (selected_entries<span style="color:rgb(98,98,98)">&lt;</span><span style="color:rgb(98,98,98)">=</span>end)]
+<span class="ansi-green-fg">     18</span> targ_in_range <span style="color:rgb(98,98,98)">=</span> target[[(selected_entries<span style="color:rgb(98,98,98)">&gt;</span>start)[:,<span style="color:rgb(98,98,98)">0</span>] <span style="color:rgb(98,98,98)">&amp;</span> (selected_entries<span style="color:rgb(98,98,98)">&lt;</span><span style="color:rgb(98,98,98)">=</span>end)[:,<span style="color:rgb(98,98,98)">0</span>]]]<span style="color:rgb(98,98,98)">.</span>squeeze()
 
-<span class="ansi-red-fg ansi-bold">TypeError</span>: can only concatenate str (not "int") to str</pre>
+<span class="ansi-red-fg ansi-bold">NameError</span>: name 'selected_entries' is not defined</pre>
 </div>
 </div>
 <div class="cell-output cell-output-display">

@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.55">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Load datasets</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../pcs956styles.css">
+</head>
+
+<body class="nav-sidebar docked fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Load datasets</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../metricIntro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Metrics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lossMetricUtility.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Loss function, metric and utility</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../metrics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Evaluation metrics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../literatureMetric.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Suggested reading</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../calibration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Calibration</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../groupingLoss.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Grouping loss</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../literatureCalibration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Suggested reading</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../uncertainty.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Uncertainty of the prediction</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../uqmethods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Methods for uncertainty quantification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../literatureUncertainty.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Suggested reading</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Load datasets</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="cell-1" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn.functional <span class="im">as</span> F</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.optim <span class="im">as</span> optim</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torchvision <span class="im">import</span> datasets, transforms</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.optim.lr_scheduler <span class="im">import</span> StepLR</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> easydict</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-3" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> deeplake</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dstrain <span class="op">=</span> deeplake.load(<span class="st">"hub://activeloop/cifar10-train"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>dstest <span class="op">=</span> deeplake.load(<span class="st">"hub://activeloop/cifar10-test"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>C:\Users\TRBU\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\deeplake\util\check_latest_version.py:32: UserWarning: A newer version of deeplake (3.9.18) is available. It's recommended that you update to the latest version using `pip install -U deeplake`.
+  warnings.warn(
+-</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Opening dataset in read-only mode as you don't have write permissions.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>-</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>This dataset can be visualized in Jupyter Notebook by ds.visualize() or at https://app.activeloop.ai/activeloop/cifar10-train
+</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>hub://activeloop/cifar10-train loaded successfully.
+</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code> </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Opening dataset in read-only mode as you don't have write permissions.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>\</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>This dataset can be visualized in Jupyter Notebook by ds.visualize() or at https://app.activeloop.ai/activeloop/cifar10-test
+</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>hub://activeloop/cifar10-test loaded successfully.
+</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code> </code></pre>
+</div>
+</div>
+<section id="train-nn" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Train NN</h1>
+<div id="cell-5" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> train(args, model, device, train_loader, optimizer, epoch):</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    model.train()</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> batch_idx, data <span class="kw">in</span> <span class="bu">enumerate</span>(train_loader):</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        target <span class="op">=</span> data.popitem()[<span class="dv">1</span>].squeeze()</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        images <span class="op">=</span> data.popitem()[<span class="dv">1</span>]</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>        images, target <span class="op">=</span> images.to(device), target.to(device)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        optimizer.zero_grad()</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        output <span class="op">=</span> model(images)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        loss <span class="op">=</span> F.nll_loss(output, target)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        loss.backward()</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>        optimizer.step()</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> batch_idx <span class="op">%</span> args.log_interval <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">'Train Epoch: </span><span class="sc">{}</span><span class="st"> [</span><span class="sc">{}</span><span class="st">/</span><span class="sc">{}</span><span class="st"> (</span><span class="sc">{:.0f}</span><span class="st">%)]</span><span class="ch">\t</span><span class="st">Loss: </span><span class="sc">{:.6f}</span><span class="st">'</span>.<span class="bu">format</span>(</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>                epoch, batch_idx <span class="op">*</span> <span class="bu">len</span>(images), <span class="bu">len</span>(train_loader.dataset),</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>                <span class="fl">100.</span> <span class="op">*</span> batch_idx <span class="op">/</span> <span class="bu">len</span>(train_loader), loss.item()))</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> args.dry_run:</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test(model, device, test_loader):</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    model.<span class="bu">eval</span>()</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    test_loss <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    correct <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> torch.no_grad():</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> data <span class="kw">in</span> test_loader:</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>            target <span class="op">=</span> data.popitem()[<span class="dv">1</span>].squeeze()</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>            images <span class="op">=</span> data.popitem()[<span class="dv">1</span>]</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>            images, target <span class="op">=</span> images.to(device), target.to(device)</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>            output <span class="op">=</span> model(images)</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>            test_loss <span class="op">+=</span> F.nll_loss(output, target, reduction<span class="op">=</span><span class="st">'sum'</span>).item()  <span class="co"># sum up batch loss</span></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>            pred <span class="op">=</span> output.argmax(dim<span class="op">=</span><span class="dv">1</span>, keepdim<span class="op">=</span><span class="va">True</span>)  <span class="co"># get the index of the max log-probability</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>            correct <span class="op">+=</span> pred.eq(target.view_as(pred)).<span class="bu">sum</span>().item()</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>    test_loss <span class="op">/=</span> <span class="bu">len</span>(test_loader.dataset)</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">Test set: Average loss: </span><span class="sc">{:.4f}</span><span class="st">, Accuracy: </span><span class="sc">{}</span><span class="st">/</span><span class="sc">{}</span><span class="st"> (</span><span class="sc">{:.0f}</span><span class="st">%)</span><span class="ch">\n</span><span class="st">'</span>.<span class="bu">format</span>(</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>        test_loss, correct, <span class="bu">len</span>(test_loader.dataset),</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>        <span class="fl">100.</span> <span class="op">*</span> correct <span class="op">/</span> <span class="bu">len</span>(test_loader.dataset)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-6" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Training settings</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>args <span class="op">=</span> easydict.EasyDict({</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"batch_size"</span>: <span class="dv">100</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"test_batch_size"</span>: <span class="dv">10000</span>,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"train_steps"</span>: <span class="dv">1000</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"no_cuda"</span>: <span class="va">False</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"no_mps"</span>: <span class="va">True</span>,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"seed"</span>: <span class="dv">1</span>,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lr"</span>: <span class="fl">0.05</span>, </span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"gamma"</span>: <span class="fl">0.7</span>,</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"epochs"</span>: <span class="dv">10</span>,</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dry_run"</span>: <span class="va">False</span>,</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"log_interval"</span>: <span class="dv">10</span>,</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"save_model"</span>: <span class="va">False</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>use_cuda <span class="op">=</span> <span class="kw">not</span> args.no_cuda <span class="kw">and</span> torch.cuda.is_available()</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>use_mps <span class="op">=</span> <span class="kw">not</span> args.no_mps <span class="kw">and</span> torch.backends.mps.is_available()</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>torch.manual_seed(args.seed)</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> use_cuda:</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>    device <span class="op">=</span> torch.device(<span class="st">"cuda"</span>)</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> use_mps:</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>    device <span class="op">=</span> torch.device(<span class="st">"mps"</span>)</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>    device <span class="op">=</span> torch.device(<span class="st">"cpu"</span>)</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>train_kwargs <span class="op">=</span> {<span class="st">'batch_size'</span>: args.batch_size}</span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>test_kwargs <span class="op">=</span> {<span class="st">'batch_size'</span>: args.test_batch_size}</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> use_cuda:</span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>    cuda_kwargs <span class="op">=</span> {<span class="st">'num_workers'</span>: <span class="dv">1</span>,</span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>                    <span class="st">'pin_memory'</span>: <span class="va">True</span>,</span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>                    <span class="st">'shuffle'</span>: <span class="va">True</span>}</span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>    train_kwargs.update(cuda_kwargs)</span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>    test_kwargs.update(cuda_kwargs)</span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>tform <span class="op">=</span> transforms.Compose([</span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>    transforms.ToPILImage(), <span class="co"># Must convert to PIL image for subsequent operations to run</span></span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>    transforms.RandomRotation(<span class="dv">20</span>), <span class="co"># Image augmentation</span></span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>    transforms.ToTensor(), <span class="co"># Must convert to pytorch tensor for subsequent operations to run</span></span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>    transforms.Normalize([<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>], [<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>]),</span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a><span class="co">#PyTorch Dataloader</span></span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>train_loader<span class="op">=</span> dstrain.pytorch(batch_size <span class="op">=</span> args.batch_size, num_workers <span class="op">=</span> <span class="dv">1</span>, transform <span class="op">=</span> {<span class="st">'images'</span>: tform, <span class="st">'labels'</span>: <span class="va">None</span>}, shuffle <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>test_loader<span class="op">=</span> dstest.pytorch(batch_size <span class="op">=</span> args.test_batch_size, num_workers <span class="op">=</span> <span class="dv">1</span>, transform <span class="op">=</span> {<span class="st">'images'</span>: tform, <span class="st">'labels'</span>: <span class="va">None</span>}, shuffle <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> torch.hub.load(<span class="st">'pytorch/vision:v0.10.0'</span>, <span class="st">'resnet50'</span>, pretrained<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a>model.to(device)</span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> optim.Adadelta(model.parameters(), lr<span class="op">=</span>args.lr)</span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a>scheduler <span class="op">=</span> StepLR(optimizer, step_size<span class="op">=</span><span class="dv">1</span>, gamma<span class="op">=</span>args.gamma)</span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> epoch <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, args.epochs <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a>    train(args, model, device, train_loader, optimizer, epoch)</span>
+<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a>    test(model, device, test_loader)</span>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a>    scheduler.step()</span>
+<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> args.save_model:</span>
+<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a>    torch.save(model.state_dict(), <span class="st">"cifar10.pt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>C:\Users\TRBU\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\deeplake\integrations\pytorch\common.py:137: UserWarning: Decode method for tensors ['images'] is defaulting to numpy. Please consider specifying a decode_method in .pytorch() that maximizes the data preprocessing speed based on your transformation.
+  warnings.warn(
+Using cache found in C:\Users\TRBU/.cache\torch\hub\pytorch_vision_v0.10.0
+C:\Users\TRBU\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\torchvision\models\_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+C:\Users\TRBU\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\torchvision\models\_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet50_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet50_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Downloading: "https://download.pytorch.org/models/resnet50-0676ba61.pth" to C:\Users\TRBU/.cache\torch\hub\checkpoints\resnet50-0676ba61.pth
+100%|██████████| 97.8M/97.8M [00:01&lt;00:00, 82.0MB/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Train Epoch: 1 [0/50000 (0%)]   Loss: 0.620816
+Train Epoch: 1 [1000/50000 (2%)]    Loss: -3.370033
+Train Epoch: 1 [2000/50000 (4%)]    Loss: -8.588400
+Train Epoch: 1 [3000/50000 (6%)]    Loss: -15.938594
+Train Epoch: 1 [4000/50000 (8%)]    Loss: -22.653206
+Train Epoch: 1 [5000/50000 (10%)]   Loss: -27.683876
+Train Epoch: 1 [6000/50000 (12%)]   Loss: -37.926983
+Train Epoch: 1 [7000/50000 (14%)]   Loss: -43.457207
+Train Epoch: 1 [8000/50000 (16%)]   Loss: -51.036076
+Train Epoch: 1 [9000/50000 (18%)]   Loss: -52.807484
+Train Epoch: 1 [10000/50000 (20%)]  Loss: -65.960510
+Train Epoch: 1 [11000/50000 (22%)]  Loss: -64.844963
+Train Epoch: 1 [12000/50000 (24%)]  Loss: -82.903809
+Train Epoch: 1 [13000/50000 (26%)]  Loss: -89.294617
+Train Epoch: 1 [14000/50000 (28%)]  Loss: -94.471115
+Train Epoch: 1 [15000/50000 (30%)]  Loss: -116.539696
+Train Epoch: 1 [16000/50000 (32%)]  Loss: -128.211929
+Train Epoch: 1 [17000/50000 (34%)]  Loss: -133.539459
+Train Epoch: 1 [18000/50000 (36%)]  Loss: -146.064163
+Train Epoch: 1 [19000/50000 (38%)]  Loss: -155.236374
+Train Epoch: 1 [20000/50000 (40%)]  Loss: -159.137924
+Train Epoch: 1 [21000/50000 (42%)]  Loss: -188.863464
+Train Epoch: 1 [22000/50000 (44%)]  Loss: -202.389450
+Train Epoch: 1 [23000/50000 (46%)]  Loss: -215.710892
+Train Epoch: 1 [24000/50000 (48%)]  Loss: -216.333908
+Train Epoch: 1 [25000/50000 (50%)]  Loss: -242.324493
+Train Epoch: 1 [26000/50000 (52%)]  Loss: -266.639313
+Train Epoch: 1 [27000/50000 (54%)]  Loss: -274.255463
+Train Epoch: 1 [28000/50000 (56%)]  Loss: -268.965088
+Train Epoch: 1 [29000/50000 (58%)]  Loss: -290.644653
+Train Epoch: 1 [30000/50000 (60%)]  Loss: -339.182068
+Train Epoch: 1 [31000/50000 (62%)]  Loss: -334.683899
+Train Epoch: 1 [32000/50000 (64%)]  Loss: -356.979858
+Train Epoch: 1 [33000/50000 (66%)]  Loss: -369.846222
+Train Epoch: 1 [34000/50000 (68%)]  Loss: -407.209656
+Train Epoch: 1 [35000/50000 (70%)]  Loss: -434.695770
+Train Epoch: 1 [36000/50000 (72%)]  Loss: -454.379028
+Train Epoch: 1 [37000/50000 (74%)]  Loss: -482.765198
+Train Epoch: 1 [38000/50000 (76%)]  Loss: -486.715240
+Train Epoch: 1 [39000/50000 (78%)]  Loss: -599.686401
+Train Epoch: 1 [40000/50000 (80%)]  Loss: -600.863342
+Train Epoch: 1 [41000/50000 (82%)]  Loss: -616.335876
+Train Epoch: 1 [42000/50000 (84%)]  Loss: -628.213440
+Train Epoch: 1 [43000/50000 (86%)]  Loss: -700.239197
+Train Epoch: 1 [44000/50000 (88%)]  Loss: -781.591248
+Train Epoch: 1 [45000/50000 (90%)]  Loss: -790.742920
+Train Epoch: 1 [46000/50000 (92%)]  Loss: -799.794434
+Train Epoch: 1 [47000/50000 (94%)]  Loss: -841.908752
+Train Epoch: 1 [48000/50000 (96%)]  Loss: -829.473877
+Train Epoch: 1 [49000/50000 (98%)]  Loss: -998.107117
+
+Test set: Average loss: -1030.4719, Accuracy: 6718/10000 (67%)
+
+Train Epoch: 2 [0/50000 (0%)]   Loss: -961.073486
+Train Epoch: 2 [1000/50000 (2%)]    Loss: -1107.093018
+Train Epoch: 2 [2000/50000 (4%)]    Loss: -1048.916382
+Train Epoch: 2 [3000/50000 (6%)]    Loss: -1153.463013
+Train Epoch: 2 [4000/50000 (8%)]    Loss: -1187.891602
+Train Epoch: 2 [5000/50000 (10%)]   Loss: -1194.240967
+Train Epoch: 2 [6000/50000 (12%)]   Loss: -1269.164673
+Train Epoch: 2 [7000/50000 (14%)]   Loss: -1339.301147
+Train Epoch: 2 [8000/50000 (16%)]   Loss: -1384.332642
+Train Epoch: 2 [9000/50000 (18%)]   Loss: -1438.341675
+Train Epoch: 2 [10000/50000 (20%)]  Loss: -1549.187988
+Train Epoch: 2 [11000/50000 (22%)]  Loss: -1342.824951
+Train Epoch: 2 [12000/50000 (24%)]  Loss: -1662.749634
+Train Epoch: 2 [13000/50000 (26%)]  Loss: -1629.940186
+Train Epoch: 2 [14000/50000 (28%)]  Loss: -1708.163574
+Train Epoch: 2 [15000/50000 (30%)]  Loss: -1893.527222
+Train Epoch: 2 [16000/50000 (32%)]  Loss: -1888.312622
+Train Epoch: 2 [17000/50000 (34%)]  Loss: -1965.837524
+Train Epoch: 2 [18000/50000 (36%)]  Loss: -1987.676880
+Train Epoch: 2 [19000/50000 (38%)]  Loss: -1982.581421
+Train Epoch: 2 [20000/50000 (40%)]  Loss: -2078.221680
+Train Epoch: 2 [21000/50000 (42%)]  Loss: -2215.644043
+Train Epoch: 2 [22000/50000 (44%)]  Loss: -2291.758789
+Train Epoch: 2 [23000/50000 (46%)]  Loss: -2376.541504
+Train Epoch: 2 [24000/50000 (48%)]  Loss: -2305.885498
+Train Epoch: 2 [25000/50000 (50%)]  Loss: -2545.730225
+Train Epoch: 2 [26000/50000 (52%)]  Loss: -2632.871826
+Train Epoch: 2 [27000/50000 (54%)]  Loss: -2587.287109
+Train Epoch: 2 [28000/50000 (56%)]  Loss: -2598.155273
+Train Epoch: 2 [29000/50000 (58%)]  Loss: -2773.681885
+Train Epoch: 2 [30000/50000 (60%)]  Loss: -3027.611328
+Train Epoch: 2 [31000/50000 (62%)]  Loss: -2920.366943
+Train Epoch: 2 [32000/50000 (64%)]  Loss: -3022.982910
+Train Epoch: 2 [33000/50000 (66%)]  Loss: -3051.247070
+Train Epoch: 2 [34000/50000 (68%)]  Loss: -3379.188232
+Train Epoch: 2 [35000/50000 (70%)]  Loss: -3422.214355
+Train Epoch: 2 [36000/50000 (72%)]  Loss: -3410.758057
+Train Epoch: 2 [37000/50000 (74%)]  Loss: -3794.197754
+Train Epoch: 2 [38000/50000 (76%)]  Loss: -3556.196777
+Train Epoch: 2 [39000/50000 (78%)]  Loss: -4260.229492
+Train Epoch: 2 [40000/50000 (80%)]  Loss: -3923.487549
+Train Epoch: 2 [41000/50000 (82%)]  Loss: -4057.553467
+Train Epoch: 2 [42000/50000 (84%)]  Loss: -4194.257324
+Train Epoch: 2 [43000/50000 (86%)]  Loss: -4353.363770
+Train Epoch: 2 [44000/50000 (88%)]  Loss: -4963.985352
+Train Epoch: 2 [45000/50000 (90%)]  Loss: -4713.233887
+Train Epoch: 2 [46000/50000 (92%)]  Loss: -4595.112305
+Train Epoch: 2 [47000/50000 (94%)]  Loss: -4757.855957
+Train Epoch: 2 [48000/50000 (96%)]  Loss: -4516.366211
+Train Epoch: 2 [49000/50000 (98%)]  Loss: -5481.854980
+
+Test set: Average loss: -5372.9024, Accuracy: 6448/10000 (64%)
+
+Train Epoch: 3 [0/50000 (0%)]   Loss: -4881.543457
+Train Epoch: 3 [1000/50000 (2%)]    Loss: -5823.308105
+Train Epoch: 3 [2000/50000 (4%)]    Loss: -5341.680664
+Train Epoch: 3 [3000/50000 (6%)]    Loss: -5708.968750
+Train Epoch: 3 [4000/50000 (8%)]    Loss: -5874.024902
+Train Epoch: 3 [5000/50000 (10%)]   Loss: -5794.562988
+Train Epoch: 3 [6000/50000 (12%)]   Loss: -5906.709961
+Train Epoch: 3 [7000/50000 (14%)]   Loss: -6223.037598
+Train Epoch: 3 [8000/50000 (16%)]   Loss: -6502.767578
+Train Epoch: 3 [9000/50000 (18%)]   Loss: -6462.995117
+Train Epoch: 3 [10000/50000 (20%)]  Loss: -6939.407715
+Train Epoch: 3 [11000/50000 (22%)]  Loss: -5937.875488
+Train Epoch: 3 [12000/50000 (24%)]  Loss: -7141.173828
+Train Epoch: 3 [13000/50000 (26%)]  Loss: -6806.907715
+Train Epoch: 3 [14000/50000 (28%)]  Loss: -6988.064941
+Train Epoch: 3 [15000/50000 (30%)]  Loss: -7796.786133
+Train Epoch: 3 [16000/50000 (32%)]  Loss: -7611.087402
+Train Epoch: 3 [17000/50000 (34%)]  Loss: -7768.062500
+Train Epoch: 3 [18000/50000 (36%)]  Loss: -7785.614258
+Train Epoch: 3 [19000/50000 (38%)]  Loss: -7586.799316
+Train Epoch: 3 [20000/50000 (40%)]  Loss: -7876.487305
+Train Epoch: 3 [21000/50000 (42%)]  Loss: -8209.184570
+Train Epoch: 3 [22000/50000 (44%)]  Loss: -8731.661133
+Train Epoch: 3 [23000/50000 (46%)]  Loss: -8480.007812
+Train Epoch: 3 [24000/50000 (48%)]  Loss: -8171.080078
+Train Epoch: 3 [25000/50000 (50%)]  Loss: -8937.590820
+Train Epoch: 3 [26000/50000 (52%)]  Loss: -9321.210938
+Train Epoch: 3 [27000/50000 (54%)]  Loss: -8968.916016
+Train Epoch: 3 [28000/50000 (56%)]  Loss: -8851.326172
+Train Epoch: 3 [29000/50000 (58%)]  Loss: -8961.889648
+Train Epoch: 3 [30000/50000 (60%)]  Loss: -9763.844727
+Train Epoch: 3 [31000/50000 (62%)]  Loss: -9181.677734
+Train Epoch: 3 [32000/50000 (64%)]  Loss: -9674.858398
+Train Epoch: 3 [33000/50000 (66%)]  Loss: -9570.125977
+Train Epoch: 3 [34000/50000 (68%)]  Loss: -10401.311523
+Train Epoch: 3 [35000/50000 (70%)]  Loss: -10748.174805
+Train Epoch: 3 [36000/50000 (72%)]  Loss: -10202.613281
+Train Epoch: 3 [37000/50000 (74%)]  Loss: -11133.304688
+Train Epoch: 3 [38000/50000 (76%)]  Loss: -10254.773438
+Train Epoch: 3 [39000/50000 (78%)]  Loss: -12321.967773
+Train Epoch: 3 [40000/50000 (80%)]  Loss: -11523.866211
+Train Epoch: 3 [41000/50000 (82%)]  Loss: -11378.512695
+Train Epoch: 3 [42000/50000 (84%)]  Loss: -11415.625000
+Train Epoch: 3 [43000/50000 (86%)]  Loss: -11884.410156
+Train Epoch: 3 [44000/50000 (88%)]  Loss: -13497.267578
+Train Epoch: 3 [45000/50000 (90%)]  Loss: -12492.441406
+Train Epoch: 3 [46000/50000 (92%)]  Loss: -12386.865234
+Train Epoch: 3 [47000/50000 (94%)]  Loss: -12315.786133
+Train Epoch: 3 [48000/50000 (96%)]  Loss: -12051.423828
+Train Epoch: 3 [49000/50000 (98%)]  Loss: -13937.397461
+
+Test set: Average loss: -12909.2896, Accuracy: 6362/10000 (64%)
+
+Train Epoch: 4 [0/50000 (0%)]   Loss: -12554.570312
+Train Epoch: 4 [1000/50000 (2%)]    Loss: -14054.861328
+Train Epoch: 4 [2000/50000 (4%)]    Loss: -13077.471680
+Train Epoch: 4 [3000/50000 (6%)]    Loss: -13944.066406
+Train Epoch: 4 [4000/50000 (8%)]    Loss: -14220.187500
+Train Epoch: 4 [5000/50000 (10%)]   Loss: -13753.172852
+Train Epoch: 4 [6000/50000 (12%)]   Loss: -13531.103516
+Train Epoch: 4 [7000/50000 (14%)]   Loss: -15061.785156
+Train Epoch: 4 [8000/50000 (16%)]   Loss: -15143.798828
+Train Epoch: 4 [9000/50000 (18%)]   Loss: -14547.113281
+Train Epoch: 4 [10000/50000 (20%)]  Loss: -16370.758789
+Train Epoch: 4 [11000/50000 (22%)]  Loss: -13691.312500
+Train Epoch: 4 [12000/50000 (24%)]  Loss: -15572.697266
+Train Epoch: 4 [13000/50000 (26%)]  Loss: -15173.588867
+Train Epoch: 4 [14000/50000 (28%)]  Loss: -15478.717773
+Train Epoch: 4 [15000/50000 (30%)]  Loss: -17458.328125
+Train Epoch: 4 [16000/50000 (32%)]  Loss: -16475.720703
+Train Epoch: 4 [17000/50000 (34%)]  Loss: -16592.941406
+Train Epoch: 4 [18000/50000 (36%)]  Loss: -16405.908203
+Train Epoch: 4 [19000/50000 (38%)]  Loss: -16261.252930
+Train Epoch: 4 [20000/50000 (40%)]  Loss: -16678.515625
+Train Epoch: 4 [21000/50000 (42%)]  Loss: -16949.908203
+Train Epoch: 4 [22000/50000 (44%)]  Loss: -17650.488281
+Train Epoch: 4 [23000/50000 (46%)]  Loss: -17285.568359
+Train Epoch: 4 [24000/50000 (48%)]  Loss: -16213.724609
+Train Epoch: 4 [25000/50000 (50%)]  Loss: -18168.318359
+Train Epoch: 4 [26000/50000 (52%)]  Loss: -18606.818359
+Train Epoch: 4 [27000/50000 (54%)]  Loss: -18005.828125
+Train Epoch: 4 [28000/50000 (56%)]  Loss: -17138.136719
+Train Epoch: 4 [29000/50000 (58%)]  Loss: -18032.513672
+Train Epoch: 4 [30000/50000 (60%)]  Loss: -18551.960938
+Train Epoch: 4 [31000/50000 (62%)]  Loss: -17656.171875
+Train Epoch: 4 [32000/50000 (64%)]  Loss: -18413.939453
+Train Epoch: 4 [33000/50000 (66%)]  Loss: -17874.380859
+Train Epoch: 4 [34000/50000 (68%)]  Loss: -19536.136719
+Train Epoch: 4 [35000/50000 (70%)]  Loss: -20067.216797
+Train Epoch: 4 [36000/50000 (72%)]  Loss: -18687.003906
+Train Epoch: 4 [37000/50000 (74%)]  Loss: -20261.195312
+Train Epoch: 4 [38000/50000 (76%)]  Loss: -18845.126953
+Train Epoch: 4 [39000/50000 (78%)]  Loss: -21996.601562
+Train Epoch: 4 [40000/50000 (80%)]  Loss: -20405.869141
+Train Epoch: 4 [41000/50000 (82%)]  Loss: -20040.636719
+Train Epoch: 4 [42000/50000 (84%)]  Loss: -20420.660156
+Train Epoch: 4 [43000/50000 (86%)]  Loss: -20703.269531
+Train Epoch: 4 [44000/50000 (88%)]  Loss: -23246.242188
+Train Epoch: 4 [45000/50000 (90%)]  Loss: -21693.482422
+Train Epoch: 4 [46000/50000 (92%)]  Loss: -21334.171875
+Train Epoch: 4 [47000/50000 (94%)]  Loss: -20823.662109
+Train Epoch: 4 [48000/50000 (96%)]  Loss: -19976.664062
+Train Epoch: 4 [49000/50000 (98%)]  Loss: -23803.865234
+
+Test set: Average loss: -21444.8976, Accuracy: 5873/10000 (59%)
+
+Train Epoch: 5 [0/50000 (0%)]   Loss: -21393.419922
+Train Epoch: 5 [1000/50000 (2%)]    Loss: -23464.537109
+Train Epoch: 5 [2000/50000 (4%)]    Loss: -21522.470703
+Train Epoch: 5 [3000/50000 (6%)]    Loss: -22974.359375
+Train Epoch: 5 [4000/50000 (8%)]    Loss: -23284.681641
+Train Epoch: 5 [5000/50000 (10%)]   Loss: -22751.402344
+Train Epoch: 5 [6000/50000 (12%)]   Loss: -21944.814453
+Train Epoch: 5 [7000/50000 (14%)]   Loss: -23710.207031
+Train Epoch: 5 [8000/50000 (16%)]   Loss: -24320.080078
+Train Epoch: 5 [9000/50000 (18%)]   Loss: -23576.324219
+Train Epoch: 5 [10000/50000 (20%)]  Loss: -25546.136719
+Train Epoch: 5 [11000/50000 (22%)]  Loss: -21811.921875
+Train Epoch: 5 [12000/50000 (24%)]  Loss: -24836.046875
+Train Epoch: 5 [13000/50000 (26%)]  Loss: -23551.910156
+Train Epoch: 5 [14000/50000 (28%)]  Loss: -24760.322266
+Train Epoch: 5 [15000/50000 (30%)]  Loss: -26871.394531
+Train Epoch: 5 [16000/50000 (32%)]  Loss: -25652.712891
+Train Epoch: 5 [17000/50000 (34%)]  Loss: -25348.439453
+Train Epoch: 5 [18000/50000 (36%)]  Loss: -25385.400391
+Train Epoch: 5 [19000/50000 (38%)]  Loss: -24767.900391
+Train Epoch: 5 [20000/50000 (40%)]  Loss: -25026.126953
+Train Epoch: 5 [21000/50000 (42%)]  Loss: -26248.105469
+Train Epoch: 5 [22000/50000 (44%)]  Loss: -27483.925781
+Train Epoch: 5 [23000/50000 (46%)]  Loss: -25750.320312
+Train Epoch: 5 [24000/50000 (48%)]  Loss: -24134.394531
+Train Epoch: 5 [25000/50000 (50%)]  Loss: -26595.289062
+Train Epoch: 5 [26000/50000 (52%)]  Loss: -27823.726562
+Train Epoch: 5 [27000/50000 (54%)]  Loss: -26376.439453
+Train Epoch: 5 [28000/50000 (56%)]  Loss: -25678.117188
+Train Epoch: 5 [29000/50000 (58%)]  Loss: -25980.429688
+Train Epoch: 5 [30000/50000 (60%)]  Loss: -27247.244141
+Train Epoch: 5 [31000/50000 (62%)]  Loss: -25668.841797
+Train Epoch: 5 [32000/50000 (64%)]  Loss: -26709.445312
+Train Epoch: 5 [33000/50000 (66%)]  Loss: -25466.082031
+Train Epoch: 5 [34000/50000 (68%)]  Loss: -28963.386719
+Train Epoch: 5 [35000/50000 (70%)]  Loss: -28238.523438
+Train Epoch: 5 [36000/50000 (72%)]  Loss: -26241.193359
+Train Epoch: 5 [37000/50000 (74%)]  Loss: -28974.921875
+Train Epoch: 5 [38000/50000 (76%)]  Loss: -26178.177734
+Train Epoch: 5 [39000/50000 (78%)]  Loss: -30973.357422
+Train Epoch: 5 [40000/50000 (80%)]  Loss: -28669.294922
+Train Epoch: 5 [41000/50000 (82%)]  Loss: -27462.375000
+Train Epoch: 5 [42000/50000 (84%)]  Loss: -28236.462891
+Train Epoch: 5 [43000/50000 (86%)]  Loss: -28324.099609
+Train Epoch: 5 [44000/50000 (88%)]  Loss: -32627.375000
+Train Epoch: 5 [45000/50000 (90%)]  Loss: -29531.119141
+Train Epoch: 5 [46000/50000 (92%)]  Loss: -29326.720703
+Train Epoch: 5 [47000/50000 (94%)]  Loss: -28377.095703
+Train Epoch: 5 [48000/50000 (96%)]  Loss: -27610.294922
+Train Epoch: 5 [49000/50000 (98%)]  Loss: -32430.630859
+
+Test set: Average loss: -28273.3248, Accuracy: 5825/10000 (58%)
+
+Train Epoch: 6 [0/50000 (0%)]   Loss: -28262.060547
+Train Epoch: 6 [1000/50000 (2%)]    Loss: -31503.761719
+Train Epoch: 6 [2000/50000 (4%)]    Loss: -29264.775391
+Train Epoch: 6 [3000/50000 (6%)]    Loss: -30930.222656
+Train Epoch: 6 [4000/50000 (8%)]    Loss: -30571.509766
+Train Epoch: 6 [5000/50000 (10%)]   Loss: -30185.457031
+Train Epoch: 6 [6000/50000 (12%)]   Loss: -29378.390625
+Train Epoch: 6 [7000/50000 (14%)]   Loss: -31716.234375
+Train Epoch: 6 [8000/50000 (16%)]   Loss: -31214.578125
+Train Epoch: 6 [9000/50000 (18%)]   Loss: -30800.876953
+Train Epoch: 6 [10000/50000 (20%)]  Loss: -33205.726562
+Train Epoch: 6 [11000/50000 (22%)]  Loss: -28136.060547
+Train Epoch: 6 [12000/50000 (24%)]  Loss: -31985.144531
+Train Epoch: 6 [13000/50000 (26%)]  Loss: -30503.482422
+Train Epoch: 6 [14000/50000 (28%)]  Loss: -31649.328125
+Train Epoch: 6 [15000/50000 (30%)]  Loss: -35233.933594
+Train Epoch: 6 [16000/50000 (32%)]  Loss: -32319.937500
+Train Epoch: 6 [17000/50000 (34%)]  Loss: -32502.554688
+Train Epoch: 6 [18000/50000 (36%)]  Loss: -32301.216797
+Train Epoch: 6 [19000/50000 (38%)]  Loss: -31511.320312
+Train Epoch: 6 [20000/50000 (40%)]  Loss: -32094.500000
+Train Epoch: 6 [21000/50000 (42%)]  Loss: -33526.500000
+Train Epoch: 6 [22000/50000 (44%)]  Loss: -34232.046875
+Train Epoch: 6 [23000/50000 (46%)]  Loss: -33497.621094
+Train Epoch: 6 [24000/50000 (48%)]  Loss: -30969.410156
+Train Epoch: 6 [25000/50000 (50%)]  Loss: -33465.789062
+Train Epoch: 6 [26000/50000 (52%)]  Loss: -34897.199219
+Train Epoch: 6 [27000/50000 (54%)]  Loss: -32844.683594
+Train Epoch: 6 [28000/50000 (56%)]  Loss: -31793.675781
+Train Epoch: 6 [29000/50000 (58%)]  Loss: -31998.507812
+Train Epoch: 6 [30000/50000 (60%)]  Loss: -33726.628906
+Train Epoch: 6 [31000/50000 (62%)]  Loss: -31502.527344
+Train Epoch: 6 [32000/50000 (64%)]  Loss: -32548.210938
+Train Epoch: 6 [33000/50000 (66%)]  Loss: -31819.115234
+Train Epoch: 6 [34000/50000 (68%)]  Loss: -35894.066406
+Train Epoch: 6 [35000/50000 (70%)]  Loss: -34856.140625
+Train Epoch: 6 [36000/50000 (72%)]  Loss: -32553.527344
+Train Epoch: 6 [37000/50000 (74%)]  Loss: -35010.835938
+Train Epoch: 6 [38000/50000 (76%)]  Loss: -32266.150391
+Train Epoch: 6 [39000/50000 (78%)]  Loss: -37566.171875
+Train Epoch: 6 [40000/50000 (80%)]  Loss: -35401.027344
+Train Epoch: 6 [41000/50000 (82%)]  Loss: -33551.500000
+Train Epoch: 6 [42000/50000 (84%)]  Loss: -34086.652344
+Train Epoch: 6 [43000/50000 (86%)]  Loss: -34399.218750
+Train Epoch: 6 [44000/50000 (88%)]  Loss: -39130.292969
+Train Epoch: 6 [45000/50000 (90%)]  Loss: -34953.238281
+Train Epoch: 6 [46000/50000 (92%)]  Loss: -34792.261719
+Train Epoch: 6 [47000/50000 (94%)]  Loss: -33887.925781
+Train Epoch: 6 [48000/50000 (96%)]  Loss: -32359.732422
+Train Epoch: 6 [49000/50000 (98%)]  Loss: -37984.628906
+
+Test set: Average loss: -33599.5136, Accuracy: 5790/10000 (58%)
+
+Train Epoch: 7 [0/50000 (0%)]   Loss: -34060.382812
+Train Epoch: 7 [1000/50000 (2%)]    Loss: -37632.101562
+Train Epoch: 7 [2000/50000 (4%)]    Loss: -33529.085938
+Train Epoch: 7 [3000/50000 (6%)]    Loss: -35587.542969
+Train Epoch: 7 [4000/50000 (8%)]    Loss: -36340.992188
+Train Epoch: 7 [5000/50000 (10%)]   Loss: -36247.261719
+Train Epoch: 7 [6000/50000 (12%)]   Loss: -34748.519531
+Train Epoch: 7 [7000/50000 (14%)]   Loss: -37761.468750
+Train Epoch: 7 [8000/50000 (16%)]   Loss: -37183.964844
+Train Epoch: 7 [9000/50000 (18%)]   Loss: -35060.636719
+Train Epoch: 7 [10000/50000 (20%)]  Loss: -39623.890625
+Train Epoch: 7 [11000/50000 (22%)]  Loss: -33501.691406
+Train Epoch: 7 [12000/50000 (24%)]  Loss: -37369.804688
+Train Epoch: 7 [13000/50000 (26%)]  Loss: -35600.738281
+Train Epoch: 7 [14000/50000 (28%)]  Loss: -37762.710938
+Train Epoch: 7 [15000/50000 (30%)]  Loss: -40629.800781
+Train Epoch: 7 [16000/50000 (32%)]  Loss: -37628.734375
+Train Epoch: 7 [17000/50000 (34%)]  Loss: -37129.468750
+Train Epoch: 7 [18000/50000 (36%)]  Loss: -37795.453125
+Train Epoch: 7 [19000/50000 (38%)]  Loss: -35545.109375
+Train Epoch: 7 [20000/50000 (40%)]  Loss: -36647.023438
+Train Epoch: 7 [21000/50000 (42%)]  Loss: -38436.835938
+Train Epoch: 7 [22000/50000 (44%)]  Loss: -39865.367188
+Train Epoch: 7 [23000/50000 (46%)]  Loss: -38221.550781
+Train Epoch: 7 [24000/50000 (48%)]  Loss: -34627.410156
+Train Epoch: 7 [25000/50000 (50%)]  Loss: -38521.546875
+Train Epoch: 7 [26000/50000 (52%)]  Loss: -39625.945312
+Train Epoch: 7 [27000/50000 (54%)]  Loss: -37269.710938
+Train Epoch: 7 [28000/50000 (56%)]  Loss: -36460.843750
+Train Epoch: 7 [29000/50000 (58%)]  Loss: -37232.289062
+Train Epoch: 7 [30000/50000 (60%)]  Loss: -38514.121094
+Train Epoch: 7 [31000/50000 (62%)]  Loss: -35732.484375
+Train Epoch: 7 [32000/50000 (64%)]  Loss: -36433.691406
+Train Epoch: 7 [33000/50000 (66%)]  Loss: -35781.320312
+Train Epoch: 7 [34000/50000 (68%)]  Loss: -40043.894531
+Train Epoch: 7 [35000/50000 (70%)]  Loss: -38738.652344
+Train Epoch: 7 [36000/50000 (72%)]  Loss: -36361.699219
+Train Epoch: 7 [37000/50000 (74%)]  Loss: -39829.230469
+Train Epoch: 7 [38000/50000 (76%)]  Loss: -36239.683594
+Train Epoch: 7 [39000/50000 (78%)]  Loss: -42374.285156
+Train Epoch: 7 [40000/50000 (80%)]  Loss: -39779.359375
+Train Epoch: 7 [41000/50000 (82%)]  Loss: -37433.871094
+Train Epoch: 7 [42000/50000 (84%)]  Loss: -37796.421875
+Train Epoch: 7 [43000/50000 (86%)]  Loss: -38654.101562
+Train Epoch: 7 [44000/50000 (88%)]  Loss: -43619.769531
+Train Epoch: 7 [45000/50000 (90%)]  Loss: -39511.234375
+Train Epoch: 7 [46000/50000 (92%)]  Loss: -38972.101562
+Train Epoch: 7 [47000/50000 (94%)]  Loss: -37460.343750
+Train Epoch: 7 [48000/50000 (96%)]  Loss: -36750.078125
+Train Epoch: 7 [49000/50000 (98%)]  Loss: -41481.785156
+
+Test set: Average loss: -36498.2592, Accuracy: 5692/10000 (57%)
+
+Train Epoch: 8 [0/50000 (0%)]   Loss: -37869.734375
+Train Epoch: 8 [1000/50000 (2%)]    Loss: -41087.664062
+Train Epoch: 8 [2000/50000 (4%)]    Loss: -37772.773438
+Train Epoch: 8 [3000/50000 (6%)]    Loss: -39602.140625
+Train Epoch: 8 [4000/50000 (8%)]    Loss: -40275.398438
+Train Epoch: 8 [5000/50000 (10%)]   Loss: -39308.699219
+Train Epoch: 8 [6000/50000 (12%)]   Loss: -38010.765625
+Train Epoch: 8 [7000/50000 (14%)]   Loss: -41457.976562
+Train Epoch: 8 [8000/50000 (16%)]   Loss: -40347.992188
+Train Epoch: 8 [9000/50000 (18%)]   Loss: -38844.050781
+Train Epoch: 8 [10000/50000 (20%)]  Loss: -42840.269531
+Train Epoch: 8 [11000/50000 (22%)]  Loss: -35527.542969
+Train Epoch: 8 [12000/50000 (24%)]  Loss: -40179.820312
+Train Epoch: 8 [13000/50000 (26%)]  Loss: -38783.289062
+Train Epoch: 8 [14000/50000 (28%)]  Loss: -39699.179688
+Train Epoch: 8 [15000/50000 (30%)]  Loss: -45008.144531
+Train Epoch: 8 [16000/50000 (32%)]  Loss: -41302.582031
+Train Epoch: 8 [17000/50000 (34%)]  Loss: -40693.265625
+Train Epoch: 8 [18000/50000 (36%)]  Loss: -40421.941406
+Train Epoch: 8 [19000/50000 (38%)]  Loss: -38786.808594
+Train Epoch: 8 [20000/50000 (40%)]  Loss: -40042.589844
+Train Epoch: 8 [21000/50000 (42%)]  Loss: -41791.593750
+Train Epoch: 8 [22000/50000 (44%)]  Loss: -43211.468750
+Train Epoch: 8 [23000/50000 (46%)]  Loss: -41632.101562
+Train Epoch: 8 [24000/50000 (48%)]  Loss: -38275.101562
+Train Epoch: 8 [25000/50000 (50%)]  Loss: -42114.175781
+Train Epoch: 8 [26000/50000 (52%)]  Loss: -43214.230469
+Train Epoch: 8 [27000/50000 (54%)]  Loss: -40988.343750
+Train Epoch: 8 [28000/50000 (56%)]  Loss: -39023.328125
+Train Epoch: 8 [29000/50000 (58%)]  Loss: -39564.718750
+Train Epoch: 8 [30000/50000 (60%)]  Loss: -41081.148438
+Train Epoch: 8 [31000/50000 (62%)]  Loss: -37743.695312
+Train Epoch: 8 [32000/50000 (64%)]  Loss: -40044.250000
+Train Epoch: 8 [33000/50000 (66%)]  Loss: -38740.335938
+Train Epoch: 8 [34000/50000 (68%)]  Loss: -42814.015625
+Train Epoch: 8 [35000/50000 (70%)]  Loss: -42677.984375
+Train Epoch: 8 [36000/50000 (72%)]  Loss: -39196.648438
+Train Epoch: 8 [37000/50000 (74%)]  Loss: -42299.808594
+Train Epoch: 8 [38000/50000 (76%)]  Loss: -38184.171875
+Train Epoch: 8 [39000/50000 (78%)]  Loss: -45045.281250
+Train Epoch: 8 [40000/50000 (80%)]  Loss: -42237.074219
+Train Epoch: 8 [41000/50000 (82%)]  Loss: -40297.515625
+Train Epoch: 8 [42000/50000 (84%)]  Loss: -40751.195312
+Train Epoch: 8 [43000/50000 (86%)]  Loss: -41293.691406
+Train Epoch: 8 [44000/50000 (88%)]  Loss: -46175.304688
+Train Epoch: 8 [45000/50000 (90%)]  Loss: -42358.398438
+Train Epoch: 8 [46000/50000 (92%)]  Loss: -40989.144531
+Train Epoch: 8 [47000/50000 (94%)]  Loss: -39492.878906
+Train Epoch: 8 [48000/50000 (96%)]  Loss: -39622.675781
+Train Epoch: 8 [49000/50000 (98%)]  Loss: -44869.875000
+
+Test set: Average loss: -38830.7776, Accuracy: 5659/10000 (57%)
+
+Train Epoch: 9 [0/50000 (0%)]   Loss: -40074.503906
+Train Epoch: 9 [1000/50000 (2%)]    Loss: -44017.703125
+Train Epoch: 9 [2000/50000 (4%)]    Loss: -39856.453125
+Train Epoch: 9 [3000/50000 (6%)]    Loss: -42295.906250
+Train Epoch: 9 [4000/50000 (8%)]    Loss: -42691.480469
+Train Epoch: 9 [5000/50000 (10%)]   Loss: -42053.664062
+Train Epoch: 9 [6000/50000 (12%)]   Loss: -40121.675781
+Train Epoch: 9 [7000/50000 (14%)]   Loss: -43435.320312
+Train Epoch: 9 [8000/50000 (16%)]   Loss: -42597.558594
+Train Epoch: 9 [9000/50000 (18%)]   Loss: -41461.078125
+Train Epoch: 9 [10000/50000 (20%)]  Loss: -44948.699219
+Train Epoch: 9 [11000/50000 (22%)]  Loss: -38673.390625
+Train Epoch: 9 [12000/50000 (24%)]  Loss: -43024.644531
+Train Epoch: 9 [13000/50000 (26%)]  Loss: -40748.890625
+Train Epoch: 9 [14000/50000 (28%)]  Loss: -42436.085938
+Train Epoch: 9 [15000/50000 (30%)]  Loss: -47306.953125
+Train Epoch: 9 [16000/50000 (32%)]  Loss: -44018.480469
+Train Epoch: 9 [17000/50000 (34%)]  Loss: -43118.109375
+Train Epoch: 9 [18000/50000 (36%)]  Loss: -43006.203125
+Train Epoch: 9 [19000/50000 (38%)]  Loss: -41168.515625
+Train Epoch: 9 [20000/50000 (40%)]  Loss: -42379.191406
+Train Epoch: 9 [21000/50000 (42%)]  Loss: -43538.761719
+Train Epoch: 9 [22000/50000 (44%)]  Loss: -44256.636719
+Train Epoch: 9 [23000/50000 (46%)]  Loss: -43547.500000
+Train Epoch: 9 [24000/50000 (48%)]  Loss: -39712.410156
+Train Epoch: 9 [25000/50000 (50%)]  Loss: -43518.476562
+Train Epoch: 9 [26000/50000 (52%)]  Loss: -44813.078125
+Train Epoch: 9 [27000/50000 (54%)]  Loss: -42593.761719
+Train Epoch: 9 [28000/50000 (56%)]  Loss: -41316.261719
+Train Epoch: 9 [29000/50000 (58%)]  Loss: -41774.238281
+Train Epoch: 9 [30000/50000 (60%)]  Loss: -42882.363281
+Train Epoch: 9 [31000/50000 (62%)]  Loss: -39387.535156
+Train Epoch: 9 [32000/50000 (64%)]  Loss: -41896.921875
+Train Epoch: 9 [33000/50000 (66%)]  Loss: -40780.031250
+Train Epoch: 9 [34000/50000 (68%)]  Loss: -44814.988281
+Train Epoch: 9 [35000/50000 (70%)]  Loss: -44341.691406
+Train Epoch: 9 [36000/50000 (72%)]  Loss: -40978.609375
+Train Epoch: 9 [37000/50000 (74%)]  Loss: -44313.945312
+Train Epoch: 9 [38000/50000 (76%)]  Loss: -39995.234375
+Train Epoch: 9 [39000/50000 (78%)]  Loss: -47058.804688
+Train Epoch: 9 [40000/50000 (80%)]  Loss: -44172.480469
+Train Epoch: 9 [41000/50000 (82%)]  Loss: -41624.371094
+Train Epoch: 9 [42000/50000 (84%)]  Loss: -42552.046875
+Train Epoch: 9 [43000/50000 (86%)]  Loss: -42126.031250
+Train Epoch: 9 [44000/50000 (88%)]  Loss: -48171.863281
+Train Epoch: 9 [45000/50000 (90%)]  Loss: -44277.750000
+Train Epoch: 9 [46000/50000 (92%)]  Loss: -42648.476562
+Train Epoch: 9 [47000/50000 (94%)]  Loss: -41654.843750
+Train Epoch: 9 [48000/50000 (96%)]  Loss: -40990.117188
+Train Epoch: 9 [49000/50000 (98%)]  Loss: -46445.644531
+
+Test set: Average loss: -39853.8560, Accuracy: 5612/10000 (56%)
+
+Train Epoch: 10 [0/50000 (0%)]  Loss: -41810.984375
+Train Epoch: 10 [1000/50000 (2%)]   Loss: -45155.003906
+Train Epoch: 10 [2000/50000 (4%)]   Loss: -41069.578125
+Train Epoch: 10 [3000/50000 (6%)]   Loss: -43554.355469
+Train Epoch: 10 [4000/50000 (8%)]   Loss: -43264.804688
+Train Epoch: 10 [5000/50000 (10%)]  Loss: -42494.050781
+Train Epoch: 10 [6000/50000 (12%)]  Loss: -41223.769531
+Train Epoch: 10 [7000/50000 (14%)]  Loss: -45202.816406
+Train Epoch: 10 [8000/50000 (16%)]  Loss: -44748.496094
+Train Epoch: 10 [9000/50000 (18%)]  Loss: -43803.593750
+Train Epoch: 10 [10000/50000 (20%)] Loss: -46174.375000
+Train Epoch: 10 [11000/50000 (22%)] Loss: -39657.226562
+Train Epoch: 10 [12000/50000 (24%)] Loss: -45120.410156
+Train Epoch: 10 [13000/50000 (26%)] Loss: -42357.203125
+Train Epoch: 10 [14000/50000 (28%)] Loss: -44288.386719
+Train Epoch: 10 [15000/50000 (30%)] Loss: -48606.183594
+Train Epoch: 10 [16000/50000 (32%)] Loss: -44988.214844
+Train Epoch: 10 [17000/50000 (34%)] Loss: -43812.554688
+Train Epoch: 10 [18000/50000 (36%)] Loss: -43790.824219
+Train Epoch: 10 [19000/50000 (38%)] Loss: -42103.300781
+Train Epoch: 10 [20000/50000 (40%)] Loss: -43413.523438
+Train Epoch: 10 [21000/50000 (42%)] Loss: -45513.394531
+Train Epoch: 10 [22000/50000 (44%)] Loss: -46142.941406
+Train Epoch: 10 [23000/50000 (46%)] Loss: -45275.203125
+Train Epoch: 10 [24000/50000 (48%)] Loss: -41315.914062
+Train Epoch: 10 [25000/50000 (50%)] Loss: -45236.394531
+Train Epoch: 10 [26000/50000 (52%)] Loss: -46193.253906
+Train Epoch: 10 [27000/50000 (54%)] Loss: -43039.730469
+Train Epoch: 10 [28000/50000 (56%)] Loss: -41812.296875
+Train Epoch: 10 [29000/50000 (58%)] Loss: -43011.664062
+Train Epoch: 10 [30000/50000 (60%)] Loss: -43134.988281
+Train Epoch: 10 [31000/50000 (62%)] Loss: -40360.386719
+Train Epoch: 10 [32000/50000 (64%)] Loss: -42939.410156
+Train Epoch: 10 [33000/50000 (66%)] Loss: -41181.859375
+Train Epoch: 10 [34000/50000 (68%)] Loss: -45796.871094
+Train Epoch: 10 [35000/50000 (70%)] Loss: -45886.628906
+Train Epoch: 10 [36000/50000 (72%)] Loss: -42337.359375
+Train Epoch: 10 [37000/50000 (74%)] Loss: -45435.671875
+Train Epoch: 10 [38000/50000 (76%)] Loss: -40774.867188
+Train Epoch: 10 [39000/50000 (78%)] Loss: -47767.750000
+Train Epoch: 10 [40000/50000 (80%)] Loss: -45522.804688
+Train Epoch: 10 [41000/50000 (82%)] Loss: -42916.203125
+Train Epoch: 10 [42000/50000 (84%)] Loss: -44187.250000
+Train Epoch: 10 [43000/50000 (86%)] Loss: -43554.566406
+Train Epoch: 10 [44000/50000 (88%)] Loss: -49549.996094
+Train Epoch: 10 [45000/50000 (90%)] Loss: -44414.796875
+Train Epoch: 10 [46000/50000 (92%)] Loss: -43346.550781
+Train Epoch: 10 [47000/50000 (94%)] Loss: -42928.699219
+Train Epoch: 10 [48000/50000 (96%)] Loss: -41558.699219
+Train Epoch: 10 [49000/50000 (98%)] Loss: -47187.273438
+
+Test set: Average loss: -40804.6752, Accuracy: 5590/10000 (56%)
+</code></pre>
+</div>
+</div>
+</section>
+<section id="tests-on-trained-nn" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Tests on trained NN</h1>
+<div id="cell-8" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">eval</span>()</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> torch.no_grad():</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> data, target <span class="kw">in</span> test_loader:</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>        data, target <span class="op">=</span> data.to(device), target.to(device)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>        output <span class="op">=</span> model(data)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>        pred <span class="op">=</span> output.argmax(dim<span class="op">=</span><span class="dv">1</span>, keepdim<span class="op">=</span><span class="va">True</span>)  <span class="co"># get the index of the max log-probability</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>        pred2 <span class="op">=</span> torch.topk(output, k<span class="op">=</span><span class="dv">2</span>, dim<span class="op">=</span><span class="dv">1</span>)[<span class="dv">1</span>][:,<span class="dv">1</span>] <span class="co"># index of second largest log-prob</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>        pred2 <span class="op">=</span> pred2.reshape(pred2.shape[<span class="dv">0</span>],<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="correct-classified-vs-actual-number-as-a-function-of-ml-confidence-for-max-log-prob" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="correct-classified-vs-actual-number-as-a-function-of-ml-confidence-for-max-log-prob"><span class="header-section-number">2.1</span> Correct classified vs actual number as a function of ML confidence for max log-prob</h2>
+<div id="cell-10" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Transform to range [0,1]</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>output_softmax <span class="op">=</span> torch.softmax(output, dim<span class="op">=</span><span class="dv">1</span>)  </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">## Select largest entry</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>selected_entries <span class="op">=</span> torch.gather(output_softmax, <span class="dv">1</span>, pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-11" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>step <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>cat <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>binMean <span class="op">=</span> []</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>correctFreq <span class="op">=</span> []</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>error <span class="op">=</span> []</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>correct <span class="op">=</span> []</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> value <span class="kw">in</span> np.arange(<span class="dv">0</span>, <span class="fl">1.0</span>, step):</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    start <span class="op">=</span> value</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    end <span class="op">=</span> start<span class="op">+</span>step</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Select entries with convidence in interval (start,end]</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    conf_in_range <span class="op">=</span> selected_entries[(selected_entries<span class="op">&gt;</span>start) <span class="op">&amp;</span> (selected_entries<span class="op">&lt;=</span>end)]</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    pred_in_range <span class="op">=</span> pred[(selected_entries<span class="op">&gt;</span>start) <span class="op">&amp;</span> (selected_entries<span class="op">&lt;=</span>end)]</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    targ_in_range <span class="op">=</span> target[[(selected_entries<span class="op">&gt;</span>start)[:,<span class="dv">0</span>] <span class="op">&amp;</span> (selected_entries<span class="op">&lt;=</span>end)[:,<span class="dv">0</span>]]].squeeze()</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    binMean.append( start <span class="op">+</span> step<span class="op">/</span><span class="dv">2</span> )</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    correct.append( (pred_in_range <span class="op">==</span> targ_in_range).<span class="bu">sum</span>().item() )</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>    correctFreq.append( (pred_in_range <span class="op">==</span> targ_in_range).<span class="bu">sum</span>().item()<span class="op">/</span>targ_in_range.shape[<span class="dv">0</span>] <span class="cf">if</span> targ_in_range.shape[<span class="dv">0</span>]<span class="op">!=</span><span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span> )</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    error.append( np.sqrt((pred_in_range <span class="op">==</span> targ_in_range).<span class="bu">sum</span>().item())<span class="op">/</span>targ_in_range.shape[<span class="dv">0</span>] <span class="cf">if</span> targ_in_range.shape[<span class="dv">0</span>]<span class="op">!=</span><span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span> )</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">0</span>,<span class="dv">1</span>], [<span class="dv">0</span>,<span class="dv">1</span>], <span class="st">'--'</span>, color<span class="op">=</span><span class="st">'grey'</span>)</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>plt.errorbar(binMean, correctFreq, error, marker<span class="op">=</span><span class="st">'.'</span>, linestyle<span class="op">=</span><span class="st">''</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"NN output"</span>)</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Fraction correct classified"</span>)</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg ansi-bold">IndexError</span>                                Traceback (most recent call last)
+Cell <span class="ansi-green-fg ansi-bold">In[7], line 19</span>
+<span class="ansi-green-fg">     17</span>     binMean<span style="color:rgb(98,98,98)">.</span>append( start <span style="color:rgb(98,98,98)">+</span> step<span style="color:rgb(98,98,98)">/</span><span style="color:rgb(98,98,98)">2</span> )
+<span class="ansi-green-fg">     18</span>     correct<span style="color:rgb(98,98,98)">.</span>append( (pred_in_range <span style="color:rgb(98,98,98)">==</span> targ_in_range)<span style="color:rgb(98,98,98)">.</span>sum()<span style="color:rgb(98,98,98)">.</span>item() )
+<span class="ansi-green-fg ansi-bold">---&gt; 19</span>     correctFreq<span style="color:rgb(98,98,98)">.</span>append( (pred_in_range <span style="color:rgb(98,98,98)">==</span> targ_in_range)<span style="color:rgb(98,98,98)">.</span>sum()<span style="color:rgb(98,98,98)">.</span>item()<span style="color:rgb(98,98,98)">/</span>targ_in_range<span style="color:rgb(98,98,98)">.</span>shape[<span style="color:rgb(98,98,98)">0</span>] <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span class="ansi-yellow-bg">targ_in_range</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">shape</span><span class="ansi-yellow-bg">[</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">0</span><span class="ansi-yellow-bg">]</span><span style="color:rgb(98,98,98)">!=</span><span style="color:rgb(98,98,98)">0</span> <span style="font-weight:bold;color:rgb(0,135,0)">else</span> <span style="color:rgb(98,98,98)">0</span> )
+<span class="ansi-green-fg">     20</span>     error<span style="color:rgb(98,98,98)">.</span>append( np<span style="color:rgb(98,98,98)">.</span>sqrt((pred_in_range <span style="color:rgb(98,98,98)">==</span> targ_in_range)<span style="color:rgb(98,98,98)">.</span>sum()<span style="color:rgb(98,98,98)">.</span>item())<span style="color:rgb(98,98,98)">/</span>targ_in_range<span style="color:rgb(98,98,98)">.</span>shape[<span style="color:rgb(98,98,98)">0</span>] <span style="font-weight:bold;color:rgb(0,135,0)">if</span> targ_in_range<span style="color:rgb(98,98,98)">.</span>shape[<span style="color:rgb(98,98,98)">0</span>]<span style="color:rgb(98,98,98)">!=</span><span style="color:rgb(98,98,98)">0</span> <span style="font-weight:bold;color:rgb(0,135,0)">else</span> <span style="color:rgb(98,98,98)">0</span> )
+<span class="ansi-green-fg">     22</span> plt<span style="color:rgb(98,98,98)">.</span>plot([<span style="color:rgb(98,98,98)">0</span>,<span style="color:rgb(98,98,98)">1</span>], [<span style="color:rgb(98,98,98)">0</span>,<span style="color:rgb(98,98,98)">1</span>], <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">--</span><span style="color:rgb(175,0,0)">'</span>, color<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">grey</span><span style="color:rgb(175,0,0)">'</span>)
+
+<span class="ansi-red-fg ansi-bold">IndexError</span>: tuple index out of range</pre>
+</div>
+</div>
+</div>
+</section>
+<section id="classwise-check" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="classwise-check"><span class="header-section-number">2.2</span> Classwise check</h2>
+<div id="cell-13" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>step <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>binMean <span class="op">=</span> []</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>correctFreq <span class="op">=</span> []</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>error <span class="op">=</span> []</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>correct <span class="op">=</span> []</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">0</span>,<span class="dv">1</span>], [<span class="dv">0</span>,<span class="dv">1</span>], <span class="st">'--'</span>, color<span class="op">=</span><span class="st">'grey'</span>)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> cat <span class="kw">in</span> np.arange(<span class="dv">0</span>,<span class="dv">10</span>):</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> value <span class="kw">in</span> np.arange(<span class="dv">0</span>, <span class="fl">1.0</span>, step):</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>        start <span class="op">=</span> value</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>        end <span class="op">=</span> start<span class="op">+</span>step</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Select entries with convidence in interval (start,end]</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>        conf_in_range <span class="op">=</span> selected_entries[(selected_entries<span class="op">&gt;</span>start) <span class="op">&amp;</span> (selected_entries<span class="op">&lt;=</span>end)]</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>        pred_in_range <span class="op">=</span> pred[(selected_entries<span class="op">&gt;</span>start) <span class="op">&amp;</span> (selected_entries<span class="op">&lt;=</span>end)]</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>        targ_in_range <span class="op">=</span> target[[(selected_entries<span class="op">&gt;</span>start)[:,<span class="dv">0</span>] <span class="op">&amp;</span> (selected_entries<span class="op">&lt;=</span>end)[:,<span class="dv">0</span>]]].squeeze()</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Confine to only entries with target = cat</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>        conf_in_range <span class="op">=</span> conf_in_range[targ_in_range<span class="op">==</span>cat]</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>        pred_in_range <span class="op">=</span> pred_in_range[targ_in_range<span class="op">==</span>cat]</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>        targ_in_range <span class="op">=</span> targ_in_range[targ_in_range<span class="op">==</span>cat]</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>        binMean.append( start <span class="op">+</span> step<span class="op">/</span><span class="dv">2</span> )</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>        correct.append( (pred_in_range <span class="op">==</span> targ_in_range).<span class="bu">sum</span>().item() )</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>        correctFreq.append( (pred_in_range <span class="op">==</span> targ_in_range).<span class="bu">sum</span>().item()<span class="op">/</span>targ_in_range.shape[<span class="dv">0</span>] <span class="cf">if</span> targ_in_range.shape[<span class="dv">0</span>]<span class="op">!=</span><span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span> )</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>        error.append( np.sqrt((pred_in_range <span class="op">==</span> targ_in_range).<span class="bu">sum</span>().item())<span class="op">/</span>targ_in_range.shape[<span class="dv">0</span>] <span class="cf">if</span> targ_in_range.shape[<span class="dv">0</span>]<span class="op">!=</span><span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span> )</span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>    plt.plot(binMean, correctFreq, marker<span class="op">=</span><span class="st">'.'</span>, linestyle<span class="op">=</span><span class="st">''</span>, linewidth<span class="op">=</span><span class="fl">0.1</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"NN output"</span>)</span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Fraction correct classified"</span>)</span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="cifar_resnet_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-14" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>step <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>binMean <span class="op">=</span> []</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>correctFreq <span class="op">=</span> []</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>error <span class="op">=</span> []</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>correct <span class="op">=</span> []</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">0</span>,<span class="dv">1</span>], [<span class="dv">0</span>,<span class="dv">1</span>], <span class="st">'--'</span>, color<span class="op">=</span><span class="st">'grey'</span>)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>cat <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> value <span class="kw">in</span> np.arange(<span class="dv">0</span>, <span class="fl">1.0</span>, step):</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    start <span class="op">=</span> value</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    end <span class="op">=</span> start<span class="op">+</span>step</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Select entries with convidence in interval (start,end]</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    conf_in_range <span class="op">=</span> selected_entries[(selected_entries<span class="op">&gt;</span>start) <span class="op">&amp;</span> (selected_entries<span class="op">&lt;=</span>end)]</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    pred_in_range <span class="op">=</span> pred[(selected_entries<span class="op">&gt;</span>start) <span class="op">&amp;</span> (selected_entries<span class="op">&lt;=</span>end)]</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>    targ_in_range <span class="op">=</span> target[[(selected_entries<span class="op">&gt;</span>start)[:,<span class="dv">0</span>] <span class="op">&amp;</span> (selected_entries<span class="op">&lt;=</span>end)[:,<span class="dv">0</span>]]].squeeze()</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Confine to only entries with target = cat</span></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>    conf_in_range <span class="op">=</span> conf_in_range[targ_in_range<span class="op">==</span>cat]</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>    pred_in_range <span class="op">=</span> pred_in_range[targ_in_range<span class="op">==</span>cat]</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>    targ_in_range <span class="op">=</span> targ_in_range[targ_in_range<span class="op">==</span>cat]</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>    binMean.append( start <span class="op">+</span> step<span class="op">/</span><span class="dv">2</span> )</span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>    correct.append( (pred_in_range <span class="op">==</span> targ_in_range).<span class="bu">sum</span>().item() )</span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>    correctFreq.append( (pred_in_range <span class="op">==</span> targ_in_range).<span class="bu">sum</span>().item()<span class="op">/</span>targ_in_range.shape[<span class="dv">0</span>] <span class="cf">if</span> targ_in_range.shape[<span class="dv">0</span>]<span class="op">!=</span><span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span> )</span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>    error.append( np.sqrt((pred_in_range <span class="op">==</span> targ_in_range).<span class="bu">sum</span>().item())<span class="op">/</span>targ_in_range.shape[<span class="dv">0</span>] <span class="cf">if</span> targ_in_range.shape[<span class="dv">0</span>]<span class="op">!=</span><span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span> )</span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>plt.errorbar(binMean, correctFreq, error, marker<span class="op">=</span><span class="st">'.'</span>, linestyle<span class="op">=</span><span class="st">''</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"NN output"</span>)</span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Fraction correct classified"</span>)</span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="cifar_resnet_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg ansi-bold">The Kernel crashed while executing code in the current cell or a previous cell. 
+
+</span><span class="ansi-red-fg ansi-bold">Please review the code in the cell(s) to identify a possible cause of the failure. 
+
+</span><span class="ansi-red-fg ansi-bold">Click &lt;a href='https://aka.ms/vscodeJupyterKernelCrash'&gt;here&lt;/a&gt; for more info. 
+
+</span><span class="ansi-red-fg ansi-bold">View Jupyter &lt;a href='command:jupyter.viewOutput'&gt;log&lt;/a&gt; for further details.</span></pre>
+</div>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
